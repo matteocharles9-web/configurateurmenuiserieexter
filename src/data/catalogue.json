@@ -6,20 +6,22 @@
     "avertissementDonnees": "Données fictives – prototype",
     "aChiffrer": "À chiffrer"
   },
-
   "prix": {
-    "_commentaire": "TOUTES LES VALEURS DE CE BLOC SONT FICTIVES. Elles servent uniquement à faire réagir la fourchette dans le prototype. À remplacer par la grille tarifaire réelle.",
+    "_commentaire": "TOUTES LES VALEURS DE CE BLOC ET LES CHAMPS prixFictif SONT FICTIFS. Ils servent uniquement à faire réagir les estimations du prototype. À remplacer par la grille tarifaire réelle.",
     "modePrix": "fictif",
-    "fourchette": { "min": 0.9, "max": 1.15 },
-    "arrondi": 10,
-    "pose": {
-      "renovation": { "fixe": 150, "parM2": 40 },
-      "depose_totale": { "fixe": 320, "parM2": 90 }
+    "fourchette": {
+      "min": 0.9,
+      "max": 1.15
     },
+    "arrondi": 10,
     "repriseAnciennes": 60,
-    "coefGamme": { "essentiel": 1, "confort": 1.2, "premium": 1.45 }
+    "coefGamme": {
+      "essentiel": 1,
+      "confort": 1.2,
+      "premium": 1.45
+    },
+    "coefStandard": 0.72
   },
-
   "aChiffrer": {
     "_commentaire": "Valeurs non sourcées : affichées « À chiffrer » tant que les données réelles ne sont pas branchées.",
     "delaiFabrication": "À chiffrer",
@@ -28,52 +30,417 @@
     "economiesEnergie": "À chiffrer",
     "financement": "À chiffrer"
   },
-
   "familles": [
     {
       "id": "fenetre",
       "libelle": "Fenêtre",
       "pluriel": "Fenêtres",
       "accroche": "Battante, oscillo-battante, coulissante…",
-      "materiaux": ["pvc", "alu", "bois", "mixte"],
-      "dimensions": { "largeur": [40, 180], "hauteur": [40, 230], "defaut": [100, 125] },
-      "prixFictif": { "base": 180, "parM2": 260 },
+      "materiaux": [
+        "pvc",
+        "alu",
+        "bois",
+        "mixte"
+      ],
+      "dimensions": {
+        "largeur": [
+          40,
+          180
+        ],
+        "hauteur": [
+          40,
+          230
+        ],
+        "defaut": [
+          100,
+          125
+        ]
+      },
+      "prixFictif": {
+        "base": 180,
+        "parM2": 260
+      },
       "modeles": [
-        { "id": "battant-1", "libelle": "Battante 1 vantail", "description": "S'ouvre vers l'intérieur comme une porte. Idéale pour les petites ouvertures." },
-        { "id": "battant-2", "libelle": "Battante 2 vantaux", "description": "Le grand classique : deux vantaux qui s'ouvrent vers l'intérieur." },
-        { "id": "oscillo-2", "libelle": "Oscillo-battante 2 vantaux", "description": "S'ouvre en grand ou s'entrebâille par le haut pour aérer en sécurité.", "coefPrix": 1.08 },
-        { "id": "soufflet", "libelle": "Abattant (soufflet)", "description": "S'incline par le haut : parfait pour une salle de bain ou un sous-sol." },
-        { "id": "fixe", "libelle": "Châssis fixe", "description": "Ne s'ouvre pas : de la lumière sans encombrement.", "coefPrix": 0.8 },
-        { "id": "coulissant-2", "libelle": "Coulissante 2 vantaux", "description": "Les vantaux glissent sur un rail : aucun encombrement intérieur.", "coefPrix": 1.1 }
-      ]
+        {
+          "id": "battant-1",
+          "libelle": "Battante 1 vantail",
+          "description": "S'ouvre vers l'intérieur comme une porte. Idéale pour les petites ouvertures."
+        },
+        {
+          "id": "battant-2",
+          "libelle": "Battante 2 vantaux",
+          "description": "Le grand classique : deux vantaux qui s'ouvrent vers l'intérieur."
+        },
+        {
+          "id": "oscillo-2",
+          "libelle": "Oscillo-battante 2 vantaux",
+          "description": "S'ouvre en grand ou s'entrebâille par le haut pour aérer en sécurité.",
+          "coefPrix": 1.08
+        },
+        {
+          "id": "soufflet",
+          "libelle": "Abattant (soufflet)",
+          "description": "S'incline par le haut : parfait pour une salle de bain ou un sous-sol."
+        },
+        {
+          "id": "fixe",
+          "libelle": "Châssis fixe",
+          "description": "Ne s'ouvre pas : de la lumière sans encombrement.",
+          "coefPrix": 0.8
+        },
+        {
+          "id": "coulissant-2",
+          "libelle": "Coulissante 2 vantaux",
+          "description": "Les vantaux glissent sur un rail : aucun encombrement intérieur.",
+          "coefPrix": 1.1
+        }
+      ],
+      "poses": [
+        "renovation",
+        "depose_totale",
+        "neuf_applique",
+        "neuf_tunnel"
+      ],
+      "standard": {
+        "tailles": [
+          [
+            60,
+            75
+          ],
+          [
+            80,
+            75
+          ],
+          [
+            60,
+            95
+          ],
+          [
+            80,
+            95
+          ],
+          [
+            100,
+            95
+          ],
+          [
+            80,
+            115
+          ],
+          [
+            100,
+            115
+          ],
+          [
+            120,
+            115
+          ],
+          [
+            100,
+            125
+          ],
+          [
+            120,
+            125
+          ],
+          [
+            140,
+            125
+          ],
+          [
+            100,
+            135
+          ],
+          [
+            120,
+            135
+          ]
+        ],
+        "materiaux": [
+          "pvc",
+          "alu"
+        ],
+        "coloris": [
+          "blanc",
+          "anthracite",
+          "noir"
+        ]
+      }
     },
     {
       "id": "porte-fenetre",
       "libelle": "Porte-fenêtre",
       "pluriel": "Portes-fenêtres",
       "accroche": "Pour accéder au jardin ou au balcon",
-      "materiaux": ["pvc", "alu", "bois", "mixte"],
-      "dimensions": { "largeur": [60, 180], "hauteur": [180, 240], "defaut": [120, 215] },
-      "prixFictif": { "base": 260, "parM2": 250 },
+      "materiaux": [
+        "pvc",
+        "alu",
+        "bois",
+        "mixte"
+      ],
+      "dimensions": {
+        "largeur": [
+          60,
+          180
+        ],
+        "hauteur": [
+          180,
+          240
+        ],
+        "defaut": [
+          120,
+          215
+        ]
+      },
+      "prixFictif": {
+        "base": 260,
+        "parM2": 250
+      },
       "modeles": [
-        { "id": "battant-1", "libelle": "Porte-fenêtre 1 vantail", "description": "Un vantail ouvrant, pour les passages étroits." },
-        { "id": "battant-2", "libelle": "Porte-fenêtre 2 vantaux", "description": "Deux vantaux ouvrants pour un large passage." },
-        { "id": "oscillo-2", "libelle": "Porte-fenêtre oscillo-battante", "description": "S'ouvre en grand ou s'entrebâille par le haut.", "coefPrix": 1.08 }
-      ]
+        {
+          "id": "battant-1",
+          "libelle": "Porte-fenêtre 1 vantail",
+          "description": "Un vantail ouvrant, pour les passages étroits."
+        },
+        {
+          "id": "battant-2",
+          "libelle": "Porte-fenêtre 2 vantaux",
+          "description": "Deux vantaux ouvrants pour un large passage."
+        },
+        {
+          "id": "oscillo-2",
+          "libelle": "Porte-fenêtre oscillo-battante",
+          "description": "S'ouvre en grand ou s'entrebâille par le haut.",
+          "coefPrix": 1.08
+        }
+      ],
+      "poses": [
+        "renovation",
+        "depose_totale",
+        "neuf_applique",
+        "neuf_tunnel"
+      ],
+      "standard": {
+        "tailles": [
+          [
+            80,
+            215
+          ],
+          [
+            90,
+            215
+          ],
+          [
+            120,
+            215
+          ],
+          [
+            140,
+            215
+          ],
+          [
+            160,
+            215
+          ]
+        ],
+        "materiaux": [
+          "pvc",
+          "alu"
+        ],
+        "coloris": [
+          "blanc",
+          "anthracite"
+        ]
+      }
     },
     {
       "id": "baie",
-      "libelle": "Baie vitrée",
-      "pluriel": "Baies vitrées",
+      "libelle": "Baie coulissante",
+      "pluriel": "Baies coulissantes",
       "accroche": "Coulissante, à galandage…",
-      "materiaux": ["pvc", "alu", "bois"],
-      "dimensions": { "largeur": [140, 400], "hauteur": [180, 240], "defaut": [240, 215] },
-      "prixFictif": { "base": 420, "parM2": 310 },
+      "materiaux": [
+        "pvc",
+        "alu",
+        "bois"
+      ],
+      "dimensions": {
+        "largeur": [
+          140,
+          400
+        ],
+        "hauteur": [
+          180,
+          240
+        ],
+        "defaut": [
+          240,
+          215
+        ]
+      },
+      "prixFictif": {
+        "base": 420,
+        "parM2": 310
+      },
       "modeles": [
-        { "id": "coulissant-2", "libelle": "Baie coulissante 2 vantaux", "description": "Deux vantaux qui coulissent l'un devant l'autre." },
-        { "id": "coulissant-3", "libelle": "Baie coulissante 3 vantaux", "description": "Pour les très grandes ouvertures.", "coefPrix": 1.15 },
-        { "id": "galandage", "libelle": "Baie à galandage", "description": "Les vantaux disparaissent dans le mur : passage totalement libre.", "coefPrix": 1.35 },
-        { "id": "levant-coulissant", "libelle": "Baie levante-coulissante", "description": "Se soulève puis glisse : très grands vantaux, manipulation facile.", "coefPrix": 1.3 }
+        {
+          "id": "coulissant-2",
+          "libelle": "Baie coulissante 2 vantaux",
+          "description": "Deux vantaux qui coulissent l'un devant l'autre."
+        },
+        {
+          "id": "coulissant-3",
+          "libelle": "Baie coulissante 3 vantaux",
+          "description": "Pour les très grandes ouvertures.",
+          "coefPrix": 1.15
+        },
+        {
+          "id": "galandage",
+          "libelle": "Baie à galandage",
+          "description": "Les vantaux disparaissent dans le mur : passage totalement libre.",
+          "coefPrix": 1.35
+        },
+        {
+          "id": "levant-coulissant",
+          "libelle": "Baie levante-coulissante",
+          "description": "Se soulève puis glisse : très grands vantaux, manipulation facile.",
+          "coefPrix": 1.3
+        }
+      ],
+      "poses": [
+        "renovation",
+        "depose_totale",
+        "neuf_applique",
+        "neuf_tunnel"
+      ],
+      "standard": {
+        "tailles": [
+          [
+            180,
+            215
+          ],
+          [
+            210,
+            215
+          ],
+          [
+            240,
+            215
+          ],
+          [
+            300,
+            215
+          ]
+        ],
+        "materiaux": [
+          "alu",
+          "pvc"
+        ],
+        "coloris": [
+          "blanc",
+          "anthracite",
+          "noir"
+        ]
+      }
+    },
+    {
+      "id": "fenetre-toit",
+      "libelle": "Fenêtre de toit",
+      "pluriel": "Fenêtres de toit",
+      "accroche": "Rotation, projection, tabatière…",
+      "materiaux": [
+        "bois",
+        "pvc"
+      ],
+      "dimensions": {
+        "largeur": [
+          45,
+          140
+        ],
+        "hauteur": [
+          55,
+          160
+        ],
+        "defaut": [
+          78,
+          98
+        ]
+      },
+      "prixFictif": {
+        "base": 380,
+        "parM2": 320
+      },
+      "poses": [
+        "toit_remplacement",
+        "toit_creation"
+      ],
+      "criteres": [
+        "thermique",
+        "acoustique",
+        "economies",
+        "entretien"
+      ],
+      "standard": {
+        "tailles": [
+          [
+            55,
+            78
+          ],
+          [
+            66,
+            118
+          ],
+          [
+            78,
+            98
+          ],
+          [
+            78,
+            118
+          ],
+          [
+            78,
+            140
+          ],
+          [
+            94,
+            118
+          ],
+          [
+            114,
+            118
+          ],
+          [
+            134,
+            98
+          ]
+        ],
+        "materiaux": [
+          "bois",
+          "pvc"
+        ],
+        "coloris": [
+          "blanc",
+          "chene-naturel"
+        ]
+      },
+      "modeles": [
+        {
+          "id": "rotation",
+          "libelle": "Fenêtre de toit à rotation",
+          "description": "Pivote en son centre : la plus courante, facile à nettoyer de l'intérieur."
+        },
+        {
+          "id": "projection",
+          "libelle": "Fenêtre de toit à projection",
+          "description": "S'ouvre vers l'extérieur par le bas : une vue dégagée, idéale sous une pente faible.",
+          "coefPrix": 1.2
+        },
+        {
+          "id": "tabatiere",
+          "libelle": "Châssis tabatière",
+          "description": "Petite ouverture pour un comble non aménagé ou un accès au toit.",
+          "coefPrix": 0.6
+        }
       ]
     },
     {
@@ -81,233 +448,1380 @@
       "libelle": "Porte d'entrée",
       "pluriel": "Portes d'entrée",
       "accroche": "Pleine, vitrée, sécurisée…",
-      "materiaux": ["pvc", "alu", "bois", "acier"],
-      "dimensions": { "largeur": [70, 120], "hauteur": [190, 240], "defaut": [90, 215] },
-      "prixFictif": { "base": 900, "parM2": 150 },
+      "materiaux": [
+        "pvc",
+        "alu",
+        "bois",
+        "acier"
+      ],
+      "dimensions": {
+        "largeur": [
+          70,
+          120
+        ],
+        "hauteur": [
+          190,
+          240
+        ],
+        "defaut": [
+          90,
+          215
+        ]
+      },
+      "prixFictif": {
+        "base": 900,
+        "parM2": 150
+      },
       "modeles": [
-        { "id": "pleine", "libelle": "Porte pleine", "description": "Intimité et sécurité maximales." },
-        { "id": "semi-vitree", "libelle": "Porte semi-vitrée", "description": "Un vitrage décoratif laisse entrer la lumière.", "coefPrix": 1.08 },
-        { "id": "vitree", "libelle": "Porte vitrée", "description": "Un large vitrage feuilleté pour une entrée lumineuse.", "coefPrix": 1.15 }
-      ]
+        {
+          "id": "pleine",
+          "libelle": "Porte pleine",
+          "description": "Intimité et sécurité maximales."
+        },
+        {
+          "id": "semi-vitree",
+          "libelle": "Porte semi-vitrée",
+          "description": "Un vitrage décoratif laisse entrer la lumière.",
+          "coefPrix": 1.08
+        },
+        {
+          "id": "vitree",
+          "libelle": "Porte vitrée",
+          "description": "Un large vitrage feuilleté pour une entrée lumineuse.",
+          "coefPrix": 1.15
+        }
+      ],
+      "poses": [
+        "renovation",
+        "depose_totale",
+        "neuf_applique"
+      ],
+      "standard": {
+        "tailles": [
+          [
+            80,
+            200
+          ],
+          [
+            90,
+            200
+          ],
+          [
+            80,
+            215
+          ],
+          [
+            90,
+            215
+          ]
+        ],
+        "materiaux": [
+          "pvc",
+          "alu",
+          "acier"
+        ],
+        "coloris": [
+          "blanc",
+          "gris-clair",
+          "anthracite"
+        ]
+      }
     },
     {
       "id": "porte-service",
       "libelle": "Porte de service",
       "pluriel": "Portes de service",
       "accroche": "Garage, cellier, arrière de la maison",
-      "materiaux": ["pvc", "acier", "bois"],
-      "dimensions": { "largeur": [70, 100], "hauteur": [190, 230], "defaut": [80, 205] },
-      "prixFictif": { "base": 450, "parM2": 120 },
+      "materiaux": [
+        "pvc",
+        "acier",
+        "bois"
+      ],
+      "dimensions": {
+        "largeur": [
+          70,
+          100
+        ],
+        "hauteur": [
+          190,
+          230
+        ],
+        "defaut": [
+          80,
+          205
+        ]
+      },
+      "prixFictif": {
+        "base": 450,
+        "parM2": 120
+      },
       "modeles": [
-        { "id": "pleine", "libelle": "Porte de service pleine", "description": "Robuste et simple." },
-        { "id": "semi-vitree", "libelle": "Porte de service 1/2 vitrée", "description": "Un vitrage en partie haute pour la lumière.", "coefPrix": 1.08 }
-      ]
+        {
+          "id": "pleine",
+          "libelle": "Porte de service pleine",
+          "description": "Robuste et simple."
+        },
+        {
+          "id": "semi-vitree",
+          "libelle": "Porte de service 1/2 vitrée",
+          "description": "Un vitrage en partie haute pour la lumière.",
+          "coefPrix": 1.08
+        }
+      ],
+      "poses": [
+        "renovation",
+        "depose_totale",
+        "neuf_applique"
+      ],
+      "standard": {
+        "tailles": [
+          [
+            80,
+            200
+          ],
+          [
+            90,
+            200
+          ]
+        ],
+        "materiaux": [
+          "pvc",
+          "acier"
+        ],
+        "coloris": [
+          "blanc",
+          "anthracite"
+        ]
+      }
     },
     {
       "id": "porte-garage",
       "libelle": "Porte de garage",
       "pluriel": "Portes de garage",
       "accroche": "Sectionnelle, enroulable, basculante…",
-      "materiaux": ["acier", "alu", "bois", "pvc"],
-      "dimensions": { "largeur": [200, 550], "hauteur": [190, 300], "defaut": [240, 200] },
-      "prixFictif": { "base": 700, "parM2": 110 },
+      "materiaux": [
+        "acier",
+        "alu",
+        "bois",
+        "pvc"
+      ],
+      "dimensions": {
+        "largeur": [
+          200,
+          550
+        ],
+        "hauteur": [
+          190,
+          300
+        ],
+        "defaut": [
+          240,
+          200
+        ]
+      },
+      "prixFictif": {
+        "base": 700,
+        "parM2": 110
+      },
       "modeles": [
-        { "id": "sectionnelle", "libelle": "Porte sectionnelle", "description": "Remonte sous le plafond : on peut se garer au plus près.", "materiaux": ["acier", "alu"] },
-        { "id": "enroulable", "libelle": "Porte enroulable", "description": "S'enroule dans un coffre : idéale si le plafond est encombré.", "materiaux": ["alu", "acier"], "coefPrix": 1.1 },
-        { "id": "basculante", "libelle": "Porte basculante", "description": "Bascule d'un bloc : solution simple et économique.", "materiaux": ["acier"], "coefPrix": 0.85 },
-        { "id": "battante-2", "libelle": "Porte battante 2 vantaux", "description": "S'ouvre comme une porte classique, sans mécanisme.", "materiaux": ["bois", "pvc", "acier"] },
-        { "id": "coulissante-laterale", "libelle": "Porte coulissante latérale", "description": "Glisse le long du mur intérieur du garage.", "materiaux": ["acier", "alu"], "coefPrix": 1.15 }
-      ]
+        {
+          "id": "sectionnelle",
+          "libelle": "Porte sectionnelle",
+          "description": "Remonte sous le plafond : on peut se garer au plus près.",
+          "materiaux": [
+            "acier",
+            "alu"
+          ]
+        },
+        {
+          "id": "enroulable",
+          "libelle": "Porte enroulable",
+          "description": "S'enroule dans un coffre : idéale si le plafond est encombré.",
+          "materiaux": [
+            "alu",
+            "acier"
+          ],
+          "coefPrix": 1.1
+        },
+        {
+          "id": "basculante",
+          "libelle": "Porte basculante",
+          "description": "Bascule d'un bloc : solution simple et économique.",
+          "materiaux": [
+            "acier"
+          ],
+          "coefPrix": 0.85
+        },
+        {
+          "id": "battante-2",
+          "libelle": "Porte battante 2 vantaux",
+          "description": "S'ouvre comme une porte classique, sans mécanisme.",
+          "materiaux": [
+            "bois",
+            "pvc",
+            "acier"
+          ]
+        },
+        {
+          "id": "coulissante-laterale",
+          "libelle": "Porte coulissante latérale",
+          "description": "Glisse le long du mur intérieur du garage.",
+          "materiaux": [
+            "acier",
+            "alu"
+          ],
+          "coefPrix": 1.15
+        }
+      ],
+      "poses": [
+        "garage_applique",
+        "garage_tableau"
+      ],
+      "criteres": [
+        "thermique",
+        "securite",
+        "entretien"
+      ],
+      "standard": {
+        "tailles": [
+          [
+            240,
+            200
+          ],
+          [
+            250,
+            200
+          ],
+          [
+            300,
+            200
+          ],
+          [
+            240,
+            212
+          ],
+          [
+            300,
+            212
+          ]
+        ],
+        "materiaux": [
+          "acier"
+        ],
+        "coloris": [
+          "blanc",
+          "anthracite",
+          "chene-dore"
+        ]
+      }
     },
     {
       "id": "volet",
       "libelle": "Volet",
       "pluriel": "Volets",
       "accroche": "Roulant, battant, persienne, coulissant…",
-      "materiaux": ["pvc", "alu", "bois", "acier"],
-      "dimensions": { "largeur": [40, 400], "hauteur": [40, 300], "defaut": [100, 125] },
-      "prixFictif": { "base": 140, "parM2": 150 },
+      "materiaux": [
+        "pvc",
+        "alu",
+        "bois",
+        "acier"
+      ],
+      "dimensions": {
+        "largeur": [
+          40,
+          400
+        ],
+        "hauteur": [
+          40,
+          300
+        ],
+        "defaut": [
+          100,
+          125
+        ]
+      },
+      "prixFictif": {
+        "base": 140,
+        "parM2": 150
+      },
       "modeles": [
-        { "id": "roulant-renovation", "libelle": "Volet roulant rénovation", "description": "Coffre posé en façade ou sous le linteau : s'installe sans travaux de maçonnerie.", "materiaux": ["pvc", "alu"] },
-        { "id": "roulant-traditionnel", "libelle": "Volet roulant traditionnel", "description": "Coffre caché dans le linteau : invisible depuis l'extérieur, pour le neuf ou la rénovation lourde.", "materiaux": ["pvc", "alu"], "coefPrix": 1.1 },
-        { "id": "battant-lames", "libelle": "Volet battant plein à lames", "description": "Le volet traditionnel, à lames verticales.", "materiaux": ["bois", "pvc", "alu"] },
-        { "id": "battant-z", "libelle": "Volet battant à barres et écharpe (Z)", "description": "Le style régional, avec ses renforts en Z.", "materiaux": ["bois", "pvc", "alu"] },
-        { "id": "battant-persienne", "libelle": "Volet battant persienné", "description": "Des lamelles laissent passer l'air et un peu de lumière.", "materiaux": ["bois", "pvc", "alu"], "coefPrix": 1.15 },
-        { "id": "persienne-pliante", "libelle": "Persienne repliable (pliante)", "description": "Se replie en accordéon dans l'embrasure : typique des immeubles et maisons de ville.", "materiaux": ["alu", "acier"], "coefPrix": 1.2 },
-        { "id": "coulissant", "libelle": "Volet coulissant", "description": "Glisse sur un rail le long de la façade : moderne et sans battement.", "materiaux": ["bois", "alu", "pvc"], "coefPrix": 1.2 },
-        { "id": "bso", "libelle": "Brise-soleil orientable", "description": "Des lames orientables pour doser la lumière et la chaleur.", "materiaux": ["alu"], "coefPrix": 1.5 }
+        {
+          "id": "roulant-renovation",
+          "libelle": "Volet roulant rénovation",
+          "description": "Coffre posé en façade ou sous le linteau : s'installe sans travaux de maçonnerie.",
+          "materiaux": [
+            "pvc",
+            "alu"
+          ]
+        },
+        {
+          "id": "roulant-traditionnel",
+          "libelle": "Volet roulant traditionnel",
+          "description": "Coffre caché dans le linteau : invisible depuis l'extérieur, pour le neuf ou la rénovation lourde.",
+          "materiaux": [
+            "pvc",
+            "alu"
+          ],
+          "coefPrix": 1.1
+        },
+        {
+          "id": "battant-lames",
+          "libelle": "Volet battant plein à lames",
+          "description": "Le volet traditionnel, à lames verticales.",
+          "materiaux": [
+            "bois",
+            "pvc",
+            "alu"
+          ]
+        },
+        {
+          "id": "battant-z",
+          "libelle": "Volet battant à barres et écharpe (Z)",
+          "description": "Le style régional, avec ses renforts en Z.",
+          "materiaux": [
+            "bois",
+            "pvc",
+            "alu"
+          ]
+        },
+        {
+          "id": "battant-persienne",
+          "libelle": "Volet battant persienné",
+          "description": "Des lamelles laissent passer l'air et un peu de lumière.",
+          "materiaux": [
+            "bois",
+            "pvc",
+            "alu"
+          ],
+          "coefPrix": 1.15
+        },
+        {
+          "id": "persienne-pliante",
+          "libelle": "Persienne repliable (pliante)",
+          "description": "Se replie en accordéon dans l'embrasure : typique des immeubles et maisons de ville.",
+          "materiaux": [
+            "alu",
+            "acier"
+          ],
+          "coefPrix": 1.2
+        },
+        {
+          "id": "coulissant",
+          "libelle": "Volet coulissant",
+          "description": "Glisse sur un rail le long de la façade : moderne et sans battement.",
+          "materiaux": [
+            "bois",
+            "alu",
+            "pvc"
+          ],
+          "coefPrix": 1.2
+        },
+        {
+          "id": "bso",
+          "libelle": "Brise-soleil orientable",
+          "description": "Des lames orientables pour doser la lumière et la chaleur.",
+          "materiaux": [
+            "alu"
+          ],
+          "coefPrix": 1.5
+        }
+      ],
+      "poses": [
+        "volet_facade",
+        "volet_tableau",
+        "volet_fixations_existantes",
+        "volet_fixations_neuves"
+      ],
+      "standard": {
+        "tailles": [
+          [
+            60,
+            75
+          ],
+          [
+            80,
+            75
+          ],
+          [
+            80,
+            95
+          ],
+          [
+            100,
+            95
+          ],
+          [
+            100,
+            115
+          ],
+          [
+            100,
+            125
+          ],
+          [
+            120,
+            125
+          ],
+          [
+            140,
+            125
+          ],
+          [
+            120,
+            215
+          ],
+          [
+            140,
+            215
+          ],
+          [
+            240,
+            215
+          ]
+        ],
+        "materiaux": [
+          "pvc",
+          "alu",
+          "bois"
+        ],
+        "coloris": [
+          "blanc",
+          "gris-clair",
+          "anthracite",
+          "chene-naturel"
+        ]
+      }
+    },
+    {
+      "id": "portail",
+      "libelle": "Portail",
+      "pluriel": "Portails",
+      "accroche": "Battant ou coulissant, plein ou ajouré",
+      "materiaux": [
+        "alu",
+        "pvc",
+        "acier",
+        "bois"
+      ],
+      "dimensions": {
+        "largeur": [
+          250,
+          600
+        ],
+        "hauteur": [
+          100,
+          200
+        ],
+        "defaut": [
+          350,
+          150
+        ]
+      },
+      "prixFictif": {
+        "base": 600,
+        "parM2": 180
+      },
+      "poses": [
+        "portail_piliers_existants",
+        "portail_piliers_neufs"
+      ],
+      "criteres": [
+        "securite",
+        "entretien"
+      ],
+      "standard": {
+        "tailles": [
+          [
+            300,
+            120
+          ],
+          [
+            300,
+            150
+          ],
+          [
+            350,
+            150
+          ],
+          [
+            400,
+            150
+          ],
+          [
+            300,
+            180
+          ],
+          [
+            350,
+            180
+          ],
+          [
+            400,
+            180
+          ]
+        ],
+        "materiaux": [
+          "alu",
+          "pvc",
+          "acier"
+        ],
+        "coloris": [
+          "blanc",
+          "gris-clair",
+          "anthracite",
+          "noir",
+          "vert-sapin"
+        ]
+      },
+      "modeles": [
+        {
+          "id": "battant-plein",
+          "libelle": "Portail battant plein",
+          "description": "Deux vantaux pleins : intimité totale."
+        },
+        {
+          "id": "battant-semi-ajoure",
+          "libelle": "Portail battant semi-ajouré",
+          "description": "Plein en bas, barreaudé en haut : un bon compromis.",
+          "coefPrix": 1.05
+        },
+        {
+          "id": "battant-ajoure",
+          "libelle": "Portail battant ajouré",
+          "description": "Barreaudage vertical : léger et lumineux.",
+          "coefPrix": 0.95
+        },
+        {
+          "id": "coulissant-plein",
+          "libelle": "Portail coulissant plein",
+          "description": "Glisse le long de la clôture : aucune place perdue dans l'allée.",
+          "coefPrix": 1.2
+        },
+        {
+          "id": "coulissant-ajoure",
+          "libelle": "Portail coulissant ajouré",
+          "description": "Coulissant et barreaudé.",
+          "coefPrix": 1.15
+        }
+      ]
+    },
+    {
+      "id": "portillon",
+      "libelle": "Portillon",
+      "pluriel": "Portillons",
+      "accroche": "Assorti au portail",
+      "materiaux": [
+        "alu",
+        "pvc",
+        "acier",
+        "bois"
+      ],
+      "dimensions": {
+        "largeur": [
+          80,
+          150
+        ],
+        "hauteur": [
+          100,
+          200
+        ],
+        "defaut": [
+          100,
+          150
+        ]
+      },
+      "prixFictif": {
+        "base": 260,
+        "parM2": 150
+      },
+      "poses": [
+        "portail_piliers_existants",
+        "portail_piliers_neufs"
+      ],
+      "criteres": [
+        "securite",
+        "entretien"
+      ],
+      "standard": {
+        "tailles": [
+          [
+            100,
+            120
+          ],
+          [
+            100,
+            150
+          ],
+          [
+            100,
+            180
+          ],
+          [
+            120,
+            150
+          ]
+        ],
+        "materiaux": [
+          "alu",
+          "pvc",
+          "acier"
+        ],
+        "coloris": [
+          "blanc",
+          "gris-clair",
+          "anthracite",
+          "noir",
+          "vert-sapin"
+        ]
+      },
+      "modeles": [
+        {
+          "id": "plein",
+          "libelle": "Portillon plein",
+          "description": "Assorti à un portail plein."
+        },
+        {
+          "id": "semi-ajoure",
+          "libelle": "Portillon semi-ajouré",
+          "description": "Plein en bas, barreaudé en haut.",
+          "coefPrix": 1.05
+        },
+        {
+          "id": "ajoure",
+          "libelle": "Portillon ajouré",
+          "description": "Barreaudage vertical.",
+          "coefPrix": 0.95
+        }
       ]
     }
   ],
-
   "gammes": [
-    { "id": "essentiel", "libelle": "Essentiel", "description": "L'indispensable, bien posé.", "bonus": { "thermique": 0, "acoustique": 0, "securite": 0 } },
-    { "id": "confort", "libelle": "Confort", "description": "Le meilleur équilibre confort / budget.", "bonus": { "thermique": 1, "acoustique": 0, "securite": 0 }, "conseille": true },
-    { "id": "premium", "libelle": "Premium", "description": "Finitions haut de gamme et performances renforcées.", "bonus": { "thermique": 1, "acoustique": 1, "securite": 1 } }
+    {
+      "id": "essentiel",
+      "libelle": "Essentiel",
+      "description": "L'indispensable, bien posé.",
+      "bonus": {
+        "thermique": 0,
+        "acoustique": 0,
+        "securite": 0
+      }
+    },
+    {
+      "id": "confort",
+      "libelle": "Confort",
+      "description": "Le meilleur équilibre confort / budget.",
+      "bonus": {
+        "thermique": 1,
+        "acoustique": 0,
+        "securite": 0
+      },
+      "conseille": true
+    },
+    {
+      "id": "premium",
+      "libelle": "Premium",
+      "description": "Finitions haut de gamme et performances renforcées.",
+      "bonus": {
+        "thermique": 1,
+        "acoustique": 1,
+        "securite": 1
+      }
+    }
   ],
-
   "materiaux": [
     {
-      "id": "pvc", "libelle": "PVC", "coefPrix": 1, "epaisseurProfil": 7,
+      "id": "pvc",
+      "libelle": "PVC",
+      "coefPrix": 1,
+      "epaisseurProfil": 7,
       "resume": "Bon isolant, sans entretien, le plus économique.",
-      "points": ["Très bon rapport qualité / prix", "Un coup d'éponge suffit", "Large choix de teintes et de plaxés bois"],
-      "perf": { "thermique": 2, "acoustique": 2, "securite": 1, "entretien": 3 },
-      "coloris": ["blanc", "gris-clair", "beige", "anthracite", "noir", "chene-dore"]
+      "points": [
+        "Très bon rapport qualité / prix",
+        "Un coup d'éponge suffit",
+        "Large choix de teintes et de plaxés bois"
+      ],
+      "perf": {
+        "thermique": 2,
+        "acoustique": 2,
+        "securite": 1,
+        "entretien": 3
+      },
+      "coloris": [
+        "blanc",
+        "gris-clair",
+        "beige",
+        "anthracite",
+        "noir",
+        "chene-dore"
+      ]
     },
     {
-      "id": "alu", "libelle": "Aluminium", "coefPrix": 1.35, "epaisseurProfil": 5,
+      "id": "alu",
+      "libelle": "Aluminium",
+      "coefPrix": 1.35,
+      "epaisseurProfil": 5,
       "resume": "Profils fins, plus de lumière, très résistant.",
-      "points": ["Profils fins : plus de vitrage, plus de lumière", "Solide, idéal pour les grandes dimensions", "Teintes contemporaines"],
-      "perf": { "thermique": 2, "acoustique": 2, "securite": 2, "entretien": 3 },
-      "coloris": ["blanc", "gris-clair", "anthracite", "noir", "bleu-canon", "vert-sapin", "rouge-basque"]
+      "points": [
+        "Profils fins : plus de vitrage, plus de lumière",
+        "Solide, idéal pour les grandes dimensions",
+        "Teintes contemporaines"
+      ],
+      "perf": {
+        "thermique": 2,
+        "acoustique": 2,
+        "securite": 2,
+        "entretien": 3
+      },
+      "coloris": [
+        "blanc",
+        "gris-clair",
+        "anthracite",
+        "noir",
+        "bleu-canon",
+        "vert-sapin",
+        "rouge-basque"
+      ]
     },
     {
-      "id": "bois", "libelle": "Bois", "coefPrix": 1.45, "epaisseurProfil": 8,
+      "id": "bois",
+      "libelle": "Bois",
+      "coefPrix": 1.45,
+      "epaisseurProfil": 8,
       "resume": "Chaleureux et naturellement isolant.",
-      "points": ["Naturellement isolant", "Charme authentique, souvent demandé en secteur protégé", "Demande un entretien régulier (lasure, peinture)"],
-      "perf": { "thermique": 3, "acoustique": 2, "securite": 2, "entretien": 1 },
-      "coloris": ["chene-naturel", "chene-dore", "noyer", "blanc", "gris-clair", "vert-sapin"]
+      "points": [
+        "Naturellement isolant",
+        "Charme authentique, souvent demandé en secteur protégé",
+        "Demande un entretien régulier (lasure, peinture)"
+      ],
+      "perf": {
+        "thermique": 3,
+        "acoustique": 2,
+        "securite": 2,
+        "entretien": 1
+      },
+      "coloris": [
+        "chene-naturel",
+        "chene-dore",
+        "noyer",
+        "blanc",
+        "gris-clair",
+        "vert-sapin"
+      ]
     },
     {
-      "id": "mixte", "libelle": "Mixte bois-alu", "coefPrix": 1.7, "epaisseurProfil": 7,
+      "id": "mixte",
+      "libelle": "Mixte bois-alu",
+      "coefPrix": 1.7,
+      "epaisseurProfil": 7,
       "resume": "Le bois à l'intérieur, l'aluminium à l'extérieur.",
-      "points": ["Chaleur du bois côté pièce", "Aucun entretien côté façade", "Haut de gamme"],
-      "perf": { "thermique": 3, "acoustique": 3, "securite": 2, "entretien": 3 },
-      "coloris": ["blanc", "gris-clair", "anthracite", "noir"]
+      "points": [
+        "Chaleur du bois côté pièce",
+        "Aucun entretien côté façade",
+        "Haut de gamme"
+      ],
+      "perf": {
+        "thermique": 3,
+        "acoustique": 3,
+        "securite": 2,
+        "entretien": 3
+      },
+      "coloris": [
+        "blanc",
+        "gris-clair",
+        "anthracite",
+        "noir"
+      ]
     },
     {
-      "id": "acier", "libelle": "Acier", "coefPrix": 1.2, "epaisseurProfil": 5,
+      "id": "acier",
+      "libelle": "Acier",
+      "coefPrix": 1.2,
+      "epaisseurProfil": 5,
       "resume": "Robuste et sécurisant.",
-      "points": ["Très résistant aux chocs", "Rassurant pour une porte d'entrée ou de garage", "Finition laquée"],
-      "perf": { "thermique": 2, "acoustique": 2, "securite": 3, "entretien": 2 },
-      "coloris": ["blanc", "gris-clair", "beige", "anthracite", "noir", "chene-dore"]
+      "points": [
+        "Très résistant aux chocs",
+        "Rassurant pour une porte d'entrée ou de garage",
+        "Finition laquée"
+      ],
+      "perf": {
+        "thermique": 2,
+        "acoustique": 2,
+        "securite": 3,
+        "entretien": 2
+      },
+      "coloris": [
+        "blanc",
+        "gris-clair",
+        "beige",
+        "anthracite",
+        "noir",
+        "chene-dore"
+      ]
     }
   ],
-
   "coloris": [
-    { "id": "blanc", "libelle": "Blanc", "hex": "#F7F7F4", "teinte": "blanc" },
-    { "id": "gris-clair", "libelle": "Gris clair", "hex": "#B9BDBF", "teinte": "clair" },
-    { "id": "beige", "libelle": "Beige crème", "hex": "#E6D9B8", "teinte": "clair" },
-    { "id": "anthracite", "libelle": "Gris anthracite", "hex": "#383E42", "teinte": "fonce" },
-    { "id": "noir", "libelle": "Noir sablé", "hex": "#1E1E1E", "teinte": "fonce" },
-    { "id": "bleu-canon", "libelle": "Bleu canon", "hex": "#2F4A63", "teinte": "couleur" },
-    { "id": "vert-sapin", "libelle": "Vert sapin", "hex": "#2D4A3A", "teinte": "couleur" },
-    { "id": "rouge-basque", "libelle": "Rouge basque", "hex": "#7A2324", "teinte": "couleur" },
-    { "id": "chene-dore", "libelle": "Chêne doré", "hex": "#A8692F", "teinte": "bois", "texture": "bois" },
-    { "id": "chene-naturel", "libelle": "Chêne naturel", "hex": "#C49A63", "teinte": "bois", "texture": "bois" },
-    { "id": "noyer", "libelle": "Noyer", "hex": "#6B4428", "teinte": "bois", "texture": "bois" }
+    {
+      "id": "blanc",
+      "libelle": "Blanc",
+      "hex": "#F7F7F4",
+      "teinte": "blanc"
+    },
+    {
+      "id": "gris-clair",
+      "libelle": "Gris clair",
+      "hex": "#B9BDBF",
+      "teinte": "clair"
+    },
+    {
+      "id": "beige",
+      "libelle": "Beige crème",
+      "hex": "#E6D9B8",
+      "teinte": "clair"
+    },
+    {
+      "id": "anthracite",
+      "libelle": "Gris anthracite",
+      "hex": "#383E42",
+      "teinte": "fonce"
+    },
+    {
+      "id": "noir",
+      "libelle": "Noir sablé",
+      "hex": "#1E1E1E",
+      "teinte": "fonce"
+    },
+    {
+      "id": "bleu-canon",
+      "libelle": "Bleu canon",
+      "hex": "#2F4A63",
+      "teinte": "couleur"
+    },
+    {
+      "id": "vert-sapin",
+      "libelle": "Vert sapin",
+      "hex": "#2D4A3A",
+      "teinte": "couleur"
+    },
+    {
+      "id": "rouge-basque",
+      "libelle": "Rouge basque",
+      "hex": "#7A2324",
+      "teinte": "couleur"
+    },
+    {
+      "id": "chene-dore",
+      "libelle": "Chêne doré",
+      "hex": "#A8692F",
+      "teinte": "bois",
+      "texture": "bois"
+    },
+    {
+      "id": "chene-naturel",
+      "libelle": "Chêne naturel",
+      "hex": "#C49A63",
+      "teinte": "bois",
+      "texture": "bois"
+    },
+    {
+      "id": "noyer",
+      "libelle": "Noyer",
+      "hex": "#6B4428",
+      "teinte": "bois",
+      "texture": "bois"
+    }
   ],
-
   "optionsGroupes": [
     {
-      "id": "vitrage", "libelle": "Vitrage", "type": "unique",
-      "familles": ["fenetre", "porte-fenetre", "baie"],
+      "id": "vitrage",
+      "libelle": "Vitrage",
+      "type": "unique",
+      "familles": [
+        "fenetre",
+        "porte-fenetre",
+        "baie"
+      ],
       "aide": "Le vitrage fait l'essentiel du confort d'une fenêtre.",
       "choix": [
-        { "id": "standard", "libelle": "Double vitrage isolant", "description": "La base, déjà bien plus confortable qu'une ancienne fenêtre.", "prixFictif": 0 },
-        { "id": "renforce", "libelle": "Double vitrage renforcé", "description": "Plus chaud au toucher, moins de sensation de paroi froide.", "prixFictif": 70, "perf": { "thermique": 1 } },
-        { "id": "triple", "libelle": "Triple vitrage", "description": "Pour les façades très exposées au froid ou au nord.", "prixFictif": 160, "perf": { "thermique": 2, "acoustique": 1 } },
-        { "id": "acoustique", "libelle": "Vitrage acoustique", "description": "Pour une rue passante, une école, un axe routier.", "prixFictif": 120, "perf": { "acoustique": 2 } }
+        {
+          "id": "standard",
+          "libelle": "Double vitrage isolant",
+          "description": "La base, déjà bien plus confortable qu'une ancienne fenêtre.",
+          "prixFictif": 0
+        },
+        {
+          "id": "renforce",
+          "libelle": "Double vitrage renforcé",
+          "description": "Plus chaud au toucher, moins de sensation de paroi froide.",
+          "prixFictif": 70,
+          "perf": {
+            "thermique": 1
+          }
+        },
+        {
+          "id": "triple",
+          "libelle": "Triple vitrage",
+          "description": "Pour les façades très exposées au froid ou au nord.",
+          "prixFictif": 160,
+          "perf": {
+            "thermique": 2,
+            "acoustique": 1
+          }
+        },
+        {
+          "id": "acoustique",
+          "libelle": "Vitrage acoustique",
+          "description": "Pour une rue passante, une école, un axe routier.",
+          "prixFictif": 120,
+          "perf": {
+            "acoustique": 2
+          }
+        }
       ]
     },
     {
-      "id": "securite-vitrage", "libelle": "Sécurité", "type": "multiple",
-      "familles": ["fenetre", "porte-fenetre", "baie"],
+      "id": "securite-vitrage",
+      "libelle": "Sécurité",
+      "type": "multiple",
+      "familles": [
+        "fenetre",
+        "porte-fenetre",
+        "baie"
+      ],
       "choix": [
-        { "id": "retardateur", "libelle": "Vitrage retardateur d'effraction", "description": "Le verre résiste aux coups et ralentit une tentative d'intrusion.", "prixFictif": 110, "perf": { "securite": 1 } },
-        { "id": "poignee-cle", "libelle": "Poignée à clé", "description": "Empêche l'ouverture de l'extérieur, même vitre cassée.", "prixFictif": 30, "perf": { "securite": 1 } }
+        {
+          "id": "retardateur",
+          "libelle": "Vitrage retardateur d'effraction",
+          "description": "Le verre résiste aux coups et ralentit une tentative d'intrusion.",
+          "prixFictif": 110,
+          "perf": {
+            "securite": 1
+          }
+        },
+        {
+          "id": "poignee-cle",
+          "libelle": "Poignée à clé",
+          "description": "Empêche l'ouverture de l'extérieur, même vitre cassée.",
+          "prixFictif": 30,
+          "perf": {
+            "securite": 1
+          }
+        }
       ]
     },
     {
-      "id": "volet-integre", "libelle": "Volet roulant intégré", "type": "unique",
-      "familles": ["fenetre", "porte-fenetre", "baie"],
+      "id": "volet-integre",
+      "libelle": "Volet roulant intégré",
+      "type": "unique",
+      "familles": [
+        "fenetre",
+        "porte-fenetre",
+        "baie"
+      ],
       "aide": "Coffre posé avec la fenêtre : une seule intervention.",
       "choix": [
-        { "id": "aucun", "libelle": "Sans volet", "prixFictif": 0 },
-        { "id": "manuel", "libelle": "Volet roulant manuel (manivelle)", "prixFictif": 220, "perf": { "thermique": 1 } },
-        { "id": "motorise-filaire", "libelle": "Volet roulant motorisé filaire", "description": "Un interrupteur au mur.", "prixFictif": 380, "perf": { "thermique": 1 }, "motorise": true },
-        { "id": "motorise-radio", "libelle": "Volet roulant motorisé radio", "description": "Télécommande, compatible programmation et domotique.", "prixFictif": 450, "perf": { "thermique": 1 }, "motorise": true },
-        { "id": "motorise-solaire", "libelle": "Volet roulant motorisé solaire", "description": "Aucun câble à tirer : un petit panneau solaire l'alimente.", "prixFictif": 520, "perf": { "thermique": 1 }, "motorise": true }
+        {
+          "id": "aucun",
+          "libelle": "Sans volet",
+          "prixFictif": 0
+        },
+        {
+          "id": "manuel",
+          "libelle": "Volet roulant manuel (manivelle)",
+          "prixFictif": 220,
+          "perf": {
+            "thermique": 1
+          }
+        },
+        {
+          "id": "motorise-filaire",
+          "libelle": "Volet roulant motorisé filaire",
+          "description": "Un interrupteur au mur.",
+          "prixFictif": 380,
+          "perf": {
+            "thermique": 1
+          },
+          "motorise": true
+        },
+        {
+          "id": "motorise-radio",
+          "libelle": "Volet roulant motorisé radio",
+          "description": "Télécommande, compatible programmation et domotique.",
+          "prixFictif": 450,
+          "perf": {
+            "thermique": 1
+          },
+          "motorise": true
+        },
+        {
+          "id": "motorise-solaire",
+          "libelle": "Volet roulant motorisé solaire",
+          "description": "Aucun câble à tirer : un petit panneau solaire l'alimente.",
+          "prixFictif": 520,
+          "perf": {
+            "thermique": 1
+          },
+          "motorise": true
+        }
       ]
     },
     {
-      "id": "aeration", "libelle": "Confort", "type": "multiple",
-      "familles": ["fenetre", "porte-fenetre"],
+      "id": "aeration",
+      "libelle": "Confort",
+      "type": "multiple",
+      "familles": [
+        "fenetre",
+        "porte-fenetre"
+      ],
       "choix": [
-        { "id": "entree-air", "libelle": "Entrée d'air", "description": "Renouvelle l'air sans ouvrir, utile avec une VMC.", "prixFictif": 25 },
-        { "id": "croisillons", "libelle": "Petits bois (croisillons)", "description": "Un style traditionnel, parfois demandé en secteur protégé.", "prixFictif": 60 }
+        {
+          "id": "entree-air",
+          "libelle": "Entrée d'air",
+          "description": "Renouvelle l'air sans ouvrir, utile avec une VMC.",
+          "prixFictif": 25
+        },
+        {
+          "id": "croisillons",
+          "libelle": "Petits bois (croisillons)",
+          "description": "Un style traditionnel, parfois demandé en secteur protégé.",
+          "prixFictif": 60
+        }
       ]
     },
     {
-      "id": "serrure", "libelle": "Serrure", "type": "unique",
-      "familles": ["porte-entree", "porte-service"],
+      "id": "serrure",
+      "libelle": "Serrure",
+      "type": "unique",
+      "familles": [
+        "porte-entree",
+        "porte-service"
+      ],
       "choix": [
-        { "id": "standard", "libelle": "Serrure multipoints", "prixFictif": 0 },
-        { "id": "renforcee", "libelle": "Serrure multipoints renforcée", "description": "Plus de points de fermeture, cylindre haute sécurité.", "prixFictif": 180, "perf": { "securite": 1 } },
-        { "id": "connectee", "libelle": "Serrure connectée", "description": "Ouverture au smartphone ou par code.", "prixFictif": 390, "perf": { "securite": 1 } }
+        {
+          "id": "standard",
+          "libelle": "Serrure multipoints",
+          "prixFictif": 0
+        },
+        {
+          "id": "renforcee",
+          "libelle": "Serrure multipoints renforcée",
+          "description": "Plus de points de fermeture, cylindre haute sécurité.",
+          "prixFictif": 180,
+          "perf": {
+            "securite": 1
+          }
+        },
+        {
+          "id": "connectee",
+          "libelle": "Serrure connectée",
+          "description": "Ouverture au smartphone ou par code.",
+          "prixFictif": 390,
+          "perf": {
+            "securite": 1
+          }
+        }
       ]
     },
     {
-      "id": "accessoires-porte", "libelle": "Accessoires", "type": "multiple",
-      "familles": ["porte-entree"],
+      "id": "accessoires-porte",
+      "libelle": "Accessoires",
+      "type": "multiple",
+      "familles": [
+        "porte-entree"
+      ],
       "choix": [
-        { "id": "barre-tirage", "libelle": "Barre de tirage inox", "prixFictif": 90 },
-        { "id": "judas", "libelle": "Judas optique", "prixFictif": 25 },
-        { "id": "seuil-pmr", "libelle": "Seuil plat (accessibilité)", "description": "Facilite le passage d'un fauteuil ou d'une poussette.", "prixFictif": 70 }
+        {
+          "id": "barre-tirage",
+          "libelle": "Barre de tirage inox",
+          "prixFictif": 90
+        },
+        {
+          "id": "judas",
+          "libelle": "Judas optique",
+          "prixFictif": 25
+        },
+        {
+          "id": "seuil-pmr",
+          "libelle": "Seuil plat (accessibilité)",
+          "description": "Facilite le passage d'un fauteuil ou d'une poussette.",
+          "prixFictif": 70
+        }
       ]
     },
     {
-      "id": "manoeuvre-garage", "libelle": "Manœuvre", "type": "unique",
-      "familles": ["porte-garage"],
+      "id": "manoeuvre-garage",
+      "libelle": "Manœuvre",
+      "type": "unique",
+      "familles": [
+        "porte-garage"
+      ],
       "choix": [
-        { "id": "manuelle", "libelle": "Manuelle", "prixFictif": 0 },
-        { "id": "motorisee", "libelle": "Motorisée avec télécommandes", "description": "Ouverture depuis la voiture.", "prixFictif": 420, "motorise": true }
+        {
+          "id": "manuelle",
+          "libelle": "Manuelle",
+          "prixFictif": 0
+        },
+        {
+          "id": "motorisee",
+          "libelle": "Motorisée avec télécommandes",
+          "description": "Ouverture depuis la voiture.",
+          "prixFictif": 420,
+          "motorise": true
+        }
       ]
     },
     {
-      "id": "garage-plus", "libelle": "Équipements", "type": "multiple",
-      "familles": ["porte-garage"],
-      "modeles": ["sectionnelle", "basculante"],
+      "id": "garage-plus",
+      "libelle": "Équipements",
+      "type": "multiple",
+      "familles": [
+        "porte-garage"
+      ],
+      "modeles": [
+        "sectionnelle",
+        "basculante"
+      ],
       "choix": [
-        { "id": "portillon", "libelle": "Portillon intégré", "description": "Pour entrer à pied sans ouvrir toute la porte.", "prixFictif": 350 },
-        { "id": "hublots", "libelle": "Hublots", "description": "Un peu de lumière naturelle dans le garage.", "prixFictif": 120 }
+        {
+          "id": "portillon",
+          "libelle": "Portillon intégré",
+          "description": "Pour entrer à pied sans ouvrir toute la porte.",
+          "prixFictif": 350
+        },
+        {
+          "id": "hublots",
+          "libelle": "Hublots",
+          "description": "Un peu de lumière naturelle dans le garage.",
+          "prixFictif": 120
+        }
       ]
     },
     {
-      "id": "manoeuvre-volet", "libelle": "Manœuvre du volet", "type": "unique",
-      "familles": ["volet"],
-      "modeles": ["roulant-renovation", "roulant-traditionnel", "bso"],
+      "id": "manoeuvre-volet",
+      "libelle": "Manœuvre du volet",
+      "type": "unique",
+      "familles": [
+        "volet"
+      ],
+      "modeles": [
+        "roulant-renovation",
+        "roulant-traditionnel",
+        "bso"
+      ],
       "choix": [
-        { "id": "sangle", "libelle": "Manuelle par sangle", "prixFictif": 0 },
-        { "id": "manivelle", "libelle": "Manuelle par manivelle", "prixFictif": 30 },
-        { "id": "motorise-filaire", "libelle": "Motorisé filaire", "description": "Un interrupteur au mur.", "prixFictif": 160, "motorise": true },
-        { "id": "motorise-radio", "libelle": "Motorisé radio", "description": "Télécommande, programmation, domotique.", "prixFictif": 230, "motorise": true },
-        { "id": "motorise-solaire", "libelle": "Motorisé solaire", "description": "Sans câble : idéal en rénovation.", "prixFictif": 300, "motorise": true }
+        {
+          "id": "sangle",
+          "libelle": "Manuelle par sangle",
+          "prixFictif": 0
+        },
+        {
+          "id": "manivelle",
+          "libelle": "Manuelle par manivelle",
+          "prixFictif": 30
+        },
+        {
+          "id": "motorise-filaire",
+          "libelle": "Motorisé filaire",
+          "description": "Un interrupteur au mur.",
+          "prixFictif": 160,
+          "motorise": true
+        },
+        {
+          "id": "motorise-radio",
+          "libelle": "Motorisé radio",
+          "description": "Télécommande, programmation, domotique.",
+          "prixFictif": 230,
+          "motorise": true
+        },
+        {
+          "id": "motorise-solaire",
+          "libelle": "Motorisé solaire",
+          "description": "Sans câble : idéal en rénovation.",
+          "prixFictif": 300,
+          "motorise": true
+        }
       ]
     },
     {
-      "id": "motorisation-battant", "libelle": "Motorisation", "type": "unique",
-      "familles": ["volet"],
-      "modeles": ["battant-lames", "battant-z", "battant-persienne", "coulissant"],
+      "id": "motorisation-battant",
+      "libelle": "Motorisation",
+      "type": "unique",
+      "familles": [
+        "volet"
+      ],
+      "modeles": [
+        "battant-lames",
+        "battant-z",
+        "battant-persienne",
+        "coulissant"
+      ],
       "choix": [
-        { "id": "manuel", "libelle": "Manuel", "prixFictif": 0 },
-        { "id": "motorise", "libelle": "Motorisation de volet battant / coulissant", "description": "Ouverture et fermeture sans ouvrir la fenêtre.", "prixFictif": 480, "motorise": true }
+        {
+          "id": "manuel",
+          "libelle": "Manuel",
+          "prixFictif": 0
+        },
+        {
+          "id": "motorise",
+          "libelle": "Motorisation de volet battant / coulissant",
+          "description": "Ouverture et fermeture sans ouvrir la fenêtre.",
+          "prixFictif": 480,
+          "motorise": true
+        }
       ]
     },
     {
-      "id": "domotique", "libelle": "Domotique", "type": "multiple",
-      "familles": ["volet", "fenetre", "porte-fenetre", "baie", "porte-garage"],
+      "id": "domotique",
+      "libelle": "Domotique",
+      "type": "multiple",
+      "familles": [
+        "volet",
+        "fenetre",
+        "porte-fenetre",
+        "baie",
+        "porte-garage",
+        "fenetre-toit",
+        "portail"
+      ],
       "siMotorise": true,
       "choix": [
-        { "id": "box", "libelle": "Pilotage depuis le smartphone", "description": "Box domotique pour programmer ouvertures et fermetures.", "prixFictif": 150 }
+        {
+          "id": "box",
+          "libelle": "Pilotage depuis le smartphone",
+          "description": "Box domotique pour programmer ouvertures et fermetures.",
+          "prixFictif": 150
+        }
+      ]
+    },
+    {
+      "id": "occultation-toit",
+      "libelle": "Occultation",
+      "type": "unique",
+      "familles": [
+        "fenetre-toit"
+      ],
+      "choix": [
+        {
+          "id": "aucune",
+          "libelle": "Sans occultation",
+          "prixFictif": 0
+        },
+        {
+          "id": "store",
+          "libelle": "Store occultant intérieur",
+          "description": "Fait le noir complet dans une chambre sous les toits.",
+          "prixFictif": 110
+        },
+        {
+          "id": "volet-solaire",
+          "libelle": "Volet roulant extérieur solaire",
+          "description": "Protège de la chaleur l'été, sans câble.",
+          "prixFictif": 420,
+          "perf": {
+            "thermique": 1,
+            "acoustique": 1
+          },
+          "motorise": true
+        }
+      ]
+    },
+    {
+      "id": "ouverture-toit",
+      "libelle": "Ouverture",
+      "type": "unique",
+      "familles": [
+        "fenetre-toit"
+      ],
+      "modeles": [
+        "rotation",
+        "projection"
+      ],
+      "choix": [
+        {
+          "id": "manuelle",
+          "libelle": "Manuelle",
+          "prixFictif": 0
+        },
+        {
+          "id": "electrique",
+          "libelle": "Motorisée avec capteur de pluie",
+          "description": "Se ferme seule à la première goutte.",
+          "prixFictif": 380,
+          "motorise": true
+        }
+      ]
+    },
+    {
+      "id": "motorisation-portail",
+      "libelle": "Motorisation",
+      "type": "unique",
+      "familles": [
+        "portail"
+      ],
+      "choix": [
+        {
+          "id": "manuelle",
+          "libelle": "Manuelle",
+          "prixFictif": 0
+        },
+        {
+          "id": "bras",
+          "libelle": "Motorisation à bras articulés",
+          "description": "Pour portail battant, se fixe sur les piliers.",
+          "prixFictif": 450,
+          "motorise": true
+        },
+        {
+          "id": "enterree",
+          "libelle": "Motorisation enterrée",
+          "description": "Invisible, pour portail battant.",
+          "prixFictif": 900,
+          "motorise": true
+        },
+        {
+          "id": "coulissant",
+          "libelle": "Motorisation pour portail coulissant",
+          "prixFictif": 520,
+          "motorise": true
+        }
+      ]
+    },
+    {
+      "id": "equipements-portail",
+      "libelle": "Équipements",
+      "type": "multiple",
+      "familles": [
+        "portail",
+        "portillon"
+      ],
+      "choix": [
+        {
+          "id": "visiophone",
+          "libelle": "Visiophone",
+          "description": "Voir et parler au visiteur depuis la maison.",
+          "prixFictif": 180
+        },
+        {
+          "id": "boite-lettres",
+          "libelle": "Boîte aux lettres intégrée",
+          "prixFictif": 90
+        },
+        {
+          "id": "gache-electrique",
+          "libelle": "Gâche électrique",
+          "description": "Ouvrir le portillon à distance.",
+          "prixFictif": 75,
+          "perf": {
+            "securite": 1
+          }
+        }
       ]
     }
   ],
-
   "performances": {
     "criteres": [
       {
-        "id": "thermique", "libelle": "Confort d'hiver",
+        "id": "thermique",
+        "libelle": "Confort d'hiver",
         "niveaux": [
           "Correct : vous sentez encore un peu le froid près de la vitre.",
           "Bon : plus de courant d'air, la pièce reste agréable.",
@@ -315,7 +1829,8 @@
         ]
       },
       {
-        "id": "acoustique", "libelle": "Calme",
+        "id": "acoustique",
+        "libelle": "Calme",
         "niveaux": [
           "Correct : suffisant dans une rue calme.",
           "Bon : les bruits de la rue sont nettement atténués.",
@@ -323,7 +1838,8 @@
         ]
       },
       {
-        "id": "economies", "libelle": "Économies d'énergie",
+        "id": "economies",
+        "libelle": "Économies d'énergie",
         "source": "thermique",
         "niveaux": [
           "Un premier pas pour limiter les pertes de chaleur.",
@@ -332,7 +1848,8 @@
         ]
       },
       {
-        "id": "securite", "libelle": "Sécurité",
+        "id": "securite",
+        "libelle": "Sécurité",
         "niveaux": [
           "Fermeture standard.",
           "Bonne résistance aux tentatives d'intrusion.",
@@ -340,7 +1857,8 @@
         ]
       },
       {
-        "id": "entretien", "libelle": "Facilité d'entretien",
+        "id": "entretien",
+        "libelle": "Facilité d'entretien",
         "niveaux": [
           "Demande un entretien régulier (lasure ou peinture).",
           "Un nettoyage de temps en temps.",
@@ -348,23 +1866,233 @@
         ]
       }
     ],
-    "libellesNiveaux": ["Correct", "Bon", "Excellent"]
+    "libellesNiveaux": [
+      "Correct",
+      "Bon",
+      "Excellent"
+    ]
   },
-
   "pose": {
+    "_commentaire": "Types de pose. ecartMaxStandard (cm) : écart maximal toléré entre l'ouverture et une taille standard ; null = l'ouverture est créée ou adaptée au produit. sens : « inferieur » si le produit standard doit être plus petit que l'ouverture (posé dedans), « superieur » s'il la recouvre. prixFictif = prix de pose par un installateur (FICTIF).",
     "types": [
-      { "id": "renovation", "libelle": "Pose en rénovation", "description": "La nouvelle menuiserie est posée sur l'ancien dormant conservé. Rapide, sans abîmer les murs ni les peintures. On perd un peu de clair de vitrage." },
-      { "id": "depose_totale", "libelle": "Dépose totale", "description": "L'ancienne menuiserie est entièrement retirée. Plus de lumière et une isolation optimale, mais des finitions (plâtre, peinture) à prévoir." }
+      {
+        "id": "renovation",
+        "libelle": "Rénovation (sur l'ancien dormant)",
+        "description": "La nouvelle menuiserie se pose sur l'ancien cadre conservé. Rapide, sans abîmer murs ni peintures ; on perd un peu de clair de vitrage.",
+        "remplacement": true,
+        "ecartMaxStandard": 8,
+        "sens": "inferieur",
+        "prixFictif": {
+          "fixe": 150,
+          "parM2": 40
+        }
+      },
+      {
+        "id": "depose_totale",
+        "libelle": "Dépose totale",
+        "description": "L'ancienne menuiserie est entièrement retirée. Plus de lumière et une meilleure isolation, avec des finitions (plâtre, peinture) à prévoir.",
+        "remplacement": true,
+        "ecartMaxStandard": 10,
+        "sens": "inferieur",
+        "prixFictif": {
+          "fixe": 320,
+          "parM2": 90
+        }
+      },
+      {
+        "id": "neuf_applique",
+        "libelle": "Neuf ou extension – pose en applique",
+        "description": "Menuiserie fixée contre le mur, côté intérieur, avant le doublage isolant. L'ouverture est construite aux dimensions du produit.",
+        "remplacement": false,
+        "ecartMaxStandard": null,
+        "sens": "inferieur",
+        "prixFictif": {
+          "fixe": 180,
+          "parM2": 50
+        }
+      },
+      {
+        "id": "neuf_tunnel",
+        "libelle": "Neuf ou extension – pose en tunnel",
+        "description": "Menuiserie posée dans l'épaisseur du mur. L'ouverture est construite aux dimensions du produit.",
+        "remplacement": false,
+        "ecartMaxStandard": null,
+        "sens": "inferieur",
+        "prixFictif": {
+          "fixe": 200,
+          "parM2": 60
+        }
+      },
+      {
+        "id": "toit_remplacement",
+        "libelle": "Remplacement d'une fenêtre de toit",
+        "description": "La nouvelle fenêtre prend la place de l'ancienne : la taille doit correspondre à celle de la fenêtre existante.",
+        "remplacement": true,
+        "ecartMaxStandard": 2,
+        "sens": "inferieur",
+        "prixFictif": {
+          "fixe": 220,
+          "parM2": 60
+        }
+      },
+      {
+        "id": "toit_creation",
+        "libelle": "Création dans la toiture",
+        "description": "Une nouvelle ouverture est découpée dans le toit, aux dimensions de la fenêtre choisie.",
+        "remplacement": false,
+        "ecartMaxStandard": null,
+        "sens": "inferieur",
+        "prixFictif": {
+          "fixe": 650,
+          "parM2": 150
+        }
+      },
+      {
+        "id": "garage_applique",
+        "libelle": "Pose en applique (derrière le linteau)",
+        "description": "La porte se fixe côté intérieur et recouvre l'ouverture : la plus fréquente.",
+        "remplacement": true,
+        "ecartMaxStandard": 20,
+        "sens": "superieur",
+        "prixFictif": {
+          "fixe": 280,
+          "parM2": 20
+        }
+      },
+      {
+        "id": "garage_tableau",
+        "libelle": "Pose en tableau (dans l'ouverture)",
+        "description": "La porte se pose dans l'ouverture, entre les murs : utile si la place manque à l'intérieur.",
+        "remplacement": true,
+        "ecartMaxStandard": 8,
+        "sens": "inferieur",
+        "prixFictif": {
+          "fixe": 320,
+          "parM2": 25
+        }
+      },
+      {
+        "id": "volet_facade",
+        "libelle": "Pose en façade ou sous linteau",
+        "description": "Le coffre et les coulisses sont fixés devant l'ouverture : aucune maçonnerie.",
+        "remplacement": true,
+        "ecartMaxStandard": 10,
+        "sens": "superieur",
+        "modeles": [
+          "roulant-renovation",
+          "roulant-traditionnel",
+          "bso"
+        ],
+        "prixFictif": {
+          "fixe": 120,
+          "parM2": 30
+        }
+      },
+      {
+        "id": "volet_tableau",
+        "libelle": "Pose en tableau",
+        "description": "Le volet est posé dans l'embrasure, entre les murs.",
+        "remplacement": true,
+        "ecartMaxStandard": 4,
+        "sens": "inferieur",
+        "modeles": [
+          "roulant-renovation",
+          "roulant-traditionnel",
+          "bso"
+        ],
+        "prixFictif": {
+          "fixe": 140,
+          "parM2": 35
+        }
+      },
+      {
+        "id": "volet_fixations_existantes",
+        "libelle": "Sur les fixations existantes",
+        "description": "Les nouveaux volets reprennent les gonds ou le rail en place.",
+        "remplacement": true,
+        "ecartMaxStandard": 5,
+        "sens": "inferieur",
+        "modeles": [
+          "battant-lames",
+          "battant-z",
+          "battant-persienne",
+          "persienne-pliante",
+          "coulissant"
+        ],
+        "prixFictif": {
+          "fixe": 90,
+          "parM2": 20
+        }
+      },
+      {
+        "id": "volet_fixations_neuves",
+        "libelle": "Avec de nouvelles fixations",
+        "description": "Pose de gonds, pentures ou rail neufs, adaptés aux nouveaux volets.",
+        "remplacement": true,
+        "ecartMaxStandard": 10,
+        "sens": "inferieur",
+        "modeles": [
+          "battant-lames",
+          "battant-z",
+          "battant-persienne",
+          "persienne-pliante",
+          "coulissant"
+        ],
+        "prixFictif": {
+          "fixe": 160,
+          "parM2": 25
+        }
+      },
+      {
+        "id": "portail_piliers_existants",
+        "libelle": "Entre des piliers existants",
+        "description": "Le portail se pose entre vos piliers ou poteaux actuels.",
+        "remplacement": true,
+        "ecartMaxStandard": 10,
+        "sens": "inferieur",
+        "prixFictif": {
+          "fixe": 250,
+          "parM2": 10
+        }
+      },
+      {
+        "id": "portail_piliers_neufs",
+        "libelle": "Avec des piliers neufs",
+        "description": "Des piliers neufs sont posés à la bonne largeur pour le portail choisi.",
+        "remplacement": false,
+        "ecartMaxStandard": null,
+        "sens": "inferieur",
+        "prixFictif": {
+          "fixe": 450,
+          "parM2": 15
+        }
+      }
     ],
-    "reprise": { "libelle": "Reprise et recyclage des anciennes menuiseries", "description": "Le poseur repart avec vos anciennes menuiseries et les confie à une filière de recyclage." },
+    "posePar": [
+      {
+        "id": "pro",
+        "libelle": "Par un installateur",
+        "description": "Pose réalisée par un professionnel partenaire, garantie comprise."
+      },
+      {
+        "id": "client",
+        "libelle": "Je pose moi-même",
+        "description": "Vous recevez le produit et la liste des accessoires nécessaires. Pas de frais de pose."
+      }
+    ],
+    "reprise": {
+      "libelle": "Reprise et recyclage des anciennes menuiseries",
+      "description": "Le poseur repart avec vos anciennes menuiseries et les confie à une filière de recyclage."
+    },
     "noteMetrage": "Le métrage définitif est toujours réalisé par le poseur avant fabrication. Les dimensions saisies ici servent à l'estimation."
   },
-
   "reglementaire": {
     "avertissement": "Informations générales pour vous aider à anticiper. Seule votre mairie (ou votre syndic) peut confirmer les démarches applicables à votre logement.",
     "regles": [
       {
-        "id": "copropriete", "condition": "copropriete", "niveau": "attention",
+        "id": "copropriete",
+        "condition": "copropriete",
+        "niveau": "attention",
         "titre": "Logement en copropriété : accord à prévoir",
         "message": "Les fenêtres, portes et volets font partie de l'aspect de l'immeuble. Le règlement de copropriété peut imposer un matériau, une couleur ou un modèle.",
         "demarche": [
@@ -374,7 +2102,9 @@
         ]
       },
       {
-        "id": "secteur-protege", "condition": "secteurProtege", "niveau": "attention",
+        "id": "secteur-protege",
+        "condition": "secteurProtege",
+        "niveau": "attention",
         "titre": "Secteur protégé : avis de l'Architecte des Bâtiments de France",
         "message": "Près d'un monument historique ou dans un site patrimonial, l'Architecte des Bâtiments de France donne son avis sur le matériau, la couleur et le dessin des menuiseries.",
         "demarche": [
@@ -384,13 +2114,19 @@
         ]
       },
       {
-        "id": "secteur-inconnu", "condition": "secteurProtegeInconnu", "niveau": "info",
+        "id": "secteur-inconnu",
+        "condition": "secteurProtegeInconnu",
+        "niveau": "info",
         "titre": "Vérifiez si votre maison est en secteur protégé",
         "message": "Votre mairie ou le plan local d'urbanisme (consultable en ligne sur le Géoportail de l'urbanisme) vous l'indique.",
-        "demarche": ["Renseignez-vous en mairie, ou demandez à votre conseiller lors du rendez-vous."]
+        "demarche": [
+          "Renseignez-vous en mairie, ou demandez à votre conseiller lors du rendez-vous."
+        ]
       },
       {
-        "id": "changement-aspect", "condition": "changementAspect", "niveau": "attention",
+        "id": "changement-aspect",
+        "condition": "changementAspect",
+        "niveau": "attention",
         "titre": "L'aspect de votre façade change : déclaration préalable",
         "message": "Changer de matériau, de couleur ou de forme de menuiserie modifie l'aspect extérieur. Une déclaration préalable de travaux est en général demandée par la mairie.",
         "demarche": [
@@ -398,44 +2134,670 @@
           "Vérifiez les couleurs autorisées par le plan local d'urbanisme.",
           "Commandez une fois l'accord obtenu."
         ]
+      },
+      {
+        "id": "cloture",
+        "condition": "portailOuCloture",
+        "niveau": "info",
+        "titre": "Portail et clôture : vérifiez les règles de votre commune",
+        "message": "Dans de nombreuses communes, un nouveau portail ou une clôture demande une déclaration préalable, et le plan local d'urbanisme peut fixer hauteur, couleur ou aspect.",
+        "demarche": [
+          "Consultez le plan local d'urbanisme ou renseignez-vous en mairie.",
+          "Si une déclaration est demandée, déposez-la avant les travaux.",
+          "En lotissement, vérifiez aussi le règlement du lotissement."
+        ]
+      },
+      {
+        "id": "creation-toit",
+        "condition": "creationOuverture",
+        "niveau": "attention",
+        "titre": "Création d'une ouverture : déclaration préalable",
+        "message": "Créer une fenêtre de toit ou une nouvelle ouverture modifie l'aspect extérieur de la maison.",
+        "demarche": [
+          "Déposez une déclaration préalable de travaux en mairie.",
+          "Joignez un plan et une photo de la toiture ou de la façade.",
+          "Commandez une fois l'accord obtenu."
+        ]
       }
     ]
   },
-
   "besoins": [
-    { "id": "froid", "libelle": "J'ai froid près des fenêtres", "icone": "froid", "explication": "Un vitrage renforcé et une gamme Confort suppriment la sensation de paroi froide.", "options": { "vitrage": "renforce" }, "gammeMin": "confort", "materiaux": ["pvc", "bois", "mixte"] },
-    { "id": "bruit", "libelle": "J'entends trop la rue", "icone": "bruit", "explication": "Un vitrage acoustique atténue nettement les bruits extérieurs.", "options": { "vitrage": "acoustique" }, "gammeMin": "confort", "materiaux": ["pvc", "mixte"] },
-    { "id": "securite", "libelle": "Je veux me sentir en sécurité", "icone": "securite", "explication": "Vitrage retardateur d'effraction et poignée à clé découragent les intrusions.", "options": { "securite-vitrage": ["retardateur", "poignee-cle"], "serrure": "renforcee" }, "materiaux": ["alu", "acier"] },
-    { "id": "facture", "libelle": "Ma facture d'énergie est trop élevée", "icone": "facture", "explication": "Mieux isoler les ouvertures limite les pertes de chaleur ; un volet roulant ajoute une protection la nuit.", "options": { "vitrage": "renforce", "volet-integre": "motorise-radio" }, "gammeMin": "confort", "materiaux": ["pvc", "bois", "mixte"] },
-    { "id": "entretien", "libelle": "Je ne veux plus d'entretien", "icone": "entretien", "explication": "Le PVC et l'aluminium ne demandent qu'un coup d'éponge.", "materiaux": ["pvc", "alu"] },
-    { "id": "lumiere", "libelle": "Je manque de lumière", "icone": "lumiere", "explication": "Les profils fins de l'aluminium laissent plus de place au vitrage.", "materiaux": ["alu"] }
+    {
+      "id": "froid",
+      "libelle": "J'ai froid près des fenêtres",
+      "icone": "froid",
+      "explication": "Un vitrage renforcé et une gamme Confort suppriment la sensation de paroi froide.",
+      "options": {
+        "vitrage": "renforce"
+      },
+      "gammeMin": "confort",
+      "materiaux": [
+        "pvc",
+        "bois",
+        "mixte"
+      ]
+    },
+    {
+      "id": "bruit",
+      "libelle": "J'entends trop la rue",
+      "icone": "bruit",
+      "explication": "Un vitrage acoustique atténue nettement les bruits extérieurs.",
+      "options": {
+        "vitrage": "acoustique"
+      },
+      "gammeMin": "confort",
+      "materiaux": [
+        "pvc",
+        "mixte"
+      ]
+    },
+    {
+      "id": "securite",
+      "libelle": "Je veux me sentir en sécurité",
+      "icone": "securite",
+      "explication": "Vitrage retardateur d'effraction et poignée à clé découragent les intrusions.",
+      "options": {
+        "securite-vitrage": [
+          "retardateur",
+          "poignee-cle"
+        ],
+        "serrure": "renforcee"
+      },
+      "materiaux": [
+        "alu",
+        "acier"
+      ]
+    },
+    {
+      "id": "facture",
+      "libelle": "Ma facture d'énergie est trop élevée",
+      "icone": "facture",
+      "explication": "Mieux isoler les ouvertures limite les pertes de chaleur ; un volet roulant ajoute une protection la nuit.",
+      "options": {
+        "vitrage": "renforce",
+        "volet-integre": "motorise-radio"
+      },
+      "gammeMin": "confort",
+      "materiaux": [
+        "pvc",
+        "bois",
+        "mixte"
+      ]
+    },
+    {
+      "id": "entretien",
+      "libelle": "Je ne veux plus d'entretien",
+      "icone": "entretien",
+      "explication": "Le PVC et l'aluminium ne demandent qu'un coup d'éponge.",
+      "materiaux": [
+        "pvc",
+        "alu"
+      ]
+    },
+    {
+      "id": "lumiere",
+      "libelle": "Je manque de lumière",
+      "icone": "lumiere",
+      "explication": "Les profils fins de l'aluminium laissent plus de place au vitrage.",
+      "materiaux": [
+        "alu"
+      ]
+    }
   ],
-
   "rdv": {
     "_commentaire": "Magasins et créneaux fictifs. En production : connecter l'outil de prise de RDV Minute'pass.",
-    "magasins": ["Magasin de démonstration – Nord", "Magasin de démonstration – Centre", "Magasin de démonstration – Sud"],
-    "creneaux": ["09:00", "10:00", "11:30", "14:30", "16:00", "17:30"],
+    "magasins": [
+      "Magasin de démonstration – Nord",
+      "Magasin de démonstration – Centre",
+      "Magasin de démonstration – Sud"
+    ],
+    "creneaux": [
+      "09:00",
+      "10:00",
+      "11:30",
+      "14:30",
+      "16:00",
+      "17:30"
+    ],
     "joursProposes": 6
   },
-
   "realisations": [
-    { "id": "r1", "titre": "4 fenêtres et une porte-fenêtre en PVC anthracite", "lieu": "Maison des années 70 – Hauts-de-France", "famille": "fenetre", "modele": "battant-2", "materiau": "pvc", "coloris": "anthracite", "pose": "renovation", "texte": "Remplacement en rénovation, sans toucher aux peintures intérieures." },
-    { "id": "r2", "titre": "Baie coulissante aluminium sur jardin", "lieu": "Pavillon – Île-de-France", "famille": "baie", "modele": "coulissant-2", "materiau": "alu", "coloris": "noir", "pose": "depose_totale", "texte": "Dépose totale pour gagner de la lumière sur la terrasse." },
-    { "id": "r3", "titre": "Porte d'entrée acier sécurisée", "lieu": "Maison de ville – Grand Est", "famille": "porte-entree", "modele": "semi-vitree", "materiau": "acier", "coloris": "gris-clair", "pose": "renovation", "texte": "Serrure renforcée et vitrage décoratif feuilleté." },
-    { "id": "r4", "titre": "Volets roulants solaires en rénovation", "lieu": "Longère – Bretagne", "famille": "volet", "modele": "roulant-renovation", "materiau": "alu", "coloris": "blanc", "pose": "renovation", "texte": "Aucun câble à passer : installation en une journée." },
-    { "id": "r5", "titre": "Fenêtres bois en secteur protégé", "lieu": "Centre ancien – Occitanie", "famille": "fenetre", "modele": "battant-2", "materiau": "bois", "coloris": "chene-naturel", "pose": "depose_totale", "texte": "Petits bois et teinte validés avec l'Architecte des Bâtiments de France." },
-    { "id": "r6", "titre": "Volets battants bois à barres et écharpe", "lieu": "Mas – Provence", "famille": "volet", "modele": "battant-z", "materiau": "bois", "coloris": "vert-sapin", "pose": "renovation", "texte": "Le style régional conservé, avec des volets neufs." },
-    { "id": "r7", "titre": "Porte de garage sectionnelle motorisée", "lieu": "Maison récente – Auvergne-Rhône-Alpes", "famille": "porte-garage", "modele": "sectionnelle", "materiau": "acier", "coloris": "anthracite", "pose": "depose_totale", "texte": "Assortie aux fenêtres anthracite de la maison." },
-    { "id": "r8", "titre": "Persiennes repliables en immeuble", "lieu": "Appartement – Nouvelle-Aquitaine", "famille": "volet", "modele": "persienne-pliante", "materiau": "alu", "coloris": "gris-clair", "pose": "renovation", "texte": "Teinte validée par la copropriété avant commande." }
+    {
+      "id": "r1",
+      "titre": "4 fenêtres et une porte-fenêtre en PVC anthracite",
+      "lieu": "Maison des années 70 – Hauts-de-France",
+      "famille": "fenetre",
+      "modele": "battant-2",
+      "materiau": "pvc",
+      "coloris": "anthracite",
+      "pose": "renovation",
+      "texte": "Remplacement en rénovation, sans toucher aux peintures intérieures."
+    },
+    {
+      "id": "r2",
+      "titre": "Baie coulissante aluminium sur jardin",
+      "lieu": "Pavillon – Île-de-France",
+      "famille": "baie",
+      "modele": "coulissant-2",
+      "materiau": "alu",
+      "coloris": "noir",
+      "pose": "depose_totale",
+      "texte": "Dépose totale pour gagner de la lumière sur la terrasse."
+    },
+    {
+      "id": "r3",
+      "titre": "Porte d'entrée acier sécurisée",
+      "lieu": "Maison de ville – Grand Est",
+      "famille": "porte-entree",
+      "modele": "semi-vitree",
+      "materiau": "acier",
+      "coloris": "gris-clair",
+      "pose": "renovation",
+      "texte": "Serrure renforcée et vitrage décoratif feuilleté."
+    },
+    {
+      "id": "r4",
+      "titre": "Volets roulants solaires en rénovation",
+      "lieu": "Longère – Bretagne",
+      "famille": "volet",
+      "modele": "roulant-renovation",
+      "materiau": "alu",
+      "coloris": "blanc",
+      "pose": "renovation",
+      "texte": "Aucun câble à passer : installation en une journée."
+    },
+    {
+      "id": "r5",
+      "titre": "Fenêtres bois en secteur protégé",
+      "lieu": "Centre ancien – Occitanie",
+      "famille": "fenetre",
+      "modele": "battant-2",
+      "materiau": "bois",
+      "coloris": "chene-naturel",
+      "pose": "depose_totale",
+      "texte": "Petits bois et teinte validés avec l'Architecte des Bâtiments de France."
+    },
+    {
+      "id": "r6",
+      "titre": "Volets battants bois à barres et écharpe",
+      "lieu": "Mas – Provence",
+      "famille": "volet",
+      "modele": "battant-z",
+      "materiau": "bois",
+      "coloris": "vert-sapin",
+      "pose": "renovation",
+      "texte": "Le style régional conservé, avec des volets neufs."
+    },
+    {
+      "id": "r7",
+      "titre": "Porte de garage sectionnelle motorisée",
+      "lieu": "Maison récente – Auvergne-Rhône-Alpes",
+      "famille": "porte-garage",
+      "modele": "sectionnelle",
+      "materiau": "acier",
+      "coloris": "anthracite",
+      "pose": "depose_totale",
+      "texte": "Assortie aux fenêtres anthracite de la maison."
+    },
+    {
+      "id": "r8",
+      "titre": "Persiennes repliables en immeuble",
+      "lieu": "Appartement – Nouvelle-Aquitaine",
+      "famille": "volet",
+      "modele": "persienne-pliante",
+      "materiau": "alu",
+      "coloris": "gris-clair",
+      "pose": "renovation",
+      "texte": "Teinte validée par la copropriété avant commande."
+    },
+    {
+      "id": "r9",
+      "titre": "Portail battant aluminium motorisé",
+      "lieu": "Maison individuelle – Pays de la Loire",
+      "famille": "portail",
+      "modele": "battant-semi-ajoure",
+      "materiau": "alu",
+      "coloris": "anthracite",
+      "pose": "portail_piliers_existants",
+      "texte": "Taille standard entre les piliers existants, compensée par des gonds réglables."
+    },
+    {
+      "id": "r10",
+      "titre": "Deux fenêtres de toit dans des combles aménagés",
+      "lieu": "Maison de lotissement – Normandie",
+      "famille": "fenetre-toit",
+      "modele": "rotation",
+      "materiau": "bois",
+      "coloris": "chene-naturel",
+      "pose": "toit_creation",
+      "texte": "Création dans la toiture, avec store occultant pour la chambre."
+    }
   ],
-
   "avis": [
-    { "id": "a1", "auteur": "Client A.", "note": 5, "famille": "fenetre", "texte": "Le configurateur m'a permis d'arriver au rendez-vous en sachant déjà ce que je voulais. Le conseiller a repris mon projet directement." },
-    { "id": "a2", "auteur": "Cliente B.", "note": 4, "famille": "fenetre", "texte": "Le guide de mesure est clair. Le poseur a refait le métrage, comme annoncé." },
-    { "id": "a3", "auteur": "Client C.", "note": 5, "famille": "baie", "texte": "Voir la baie sur la photo de ma maison nous a décidés à deux." },
-    { "id": "a4", "auteur": "Cliente D.", "note": 4, "famille": "porte-entree", "texte": "Bon accompagnement, rendez-vous en visio très pratique." },
-    { "id": "a5", "auteur": "Client E.", "note": 5, "famille": "volet", "texte": "Les volets solaires : pas de travaux, pas de câble, parfait." },
-    { "id": "a6", "auteur": "Cliente F.", "note": 4, "famille": "porte-garage", "texte": "Échantillon de coloris reçu avant de choisir, très utile." },
-    { "id": "a7", "auteur": "Client G.", "note": 5, "famille": "porte-fenetre", "texte": "L'alerte copropriété m'a évité de commander une couleur refusée." }
-  ]
+    {
+      "id": "a1",
+      "auteur": "Client A.",
+      "note": 5,
+      "famille": "fenetre",
+      "texte": "Le configurateur m'a permis d'arriver au rendez-vous en sachant déjà ce que je voulais. Le conseiller a repris mon projet directement."
+    },
+    {
+      "id": "a2",
+      "auteur": "Cliente B.",
+      "note": 4,
+      "famille": "fenetre",
+      "texte": "Le guide de mesure est clair. Le poseur a refait le métrage, comme annoncé."
+    },
+    {
+      "id": "a3",
+      "auteur": "Client C.",
+      "note": 5,
+      "famille": "baie",
+      "texte": "Voir la baie sur la photo de ma maison nous a décidés à deux."
+    },
+    {
+      "id": "a4",
+      "auteur": "Cliente D.",
+      "note": 4,
+      "famille": "porte-entree",
+      "texte": "Bon accompagnement, rendez-vous en visio très pratique."
+    },
+    {
+      "id": "a5",
+      "auteur": "Client E.",
+      "note": 5,
+      "famille": "volet",
+      "texte": "Les volets solaires : pas de travaux, pas de câble, parfait."
+    },
+    {
+      "id": "a6",
+      "auteur": "Cliente F.",
+      "note": 4,
+      "famille": "porte-garage",
+      "texte": "Échantillon de coloris reçu avant de choisir, très utile."
+    },
+    {
+      "id": "a7",
+      "auteur": "Client G.",
+      "note": 5,
+      "famille": "porte-fenetre",
+      "texte": "L'alerte copropriété m'a évité de commander une couleur refusée."
+    },
+    {
+      "id": "a8",
+      "auteur": "Client H.",
+      "note": 5,
+      "famille": "portail",
+      "texte": "La comparaison standard / sur mesure m'a fait économiser : le standard passait entre mes piliers."
+    },
+    {
+      "id": "a9",
+      "auteur": "Cliente I.",
+      "note": 4,
+      "famille": "fenetre-toit",
+      "texte": "J'ai trouvé la taille grâce à la plaque de mon ancienne fenêtre, comme indiqué dans le guide."
+    }
+  ],
+  "accessoires": {
+    "_commentaire": "Accessoires nécessaires à la pose (prix FICTIFS). unite : piece (× quantite), kit, metre (périmètre), metreLargeur (largeur). Filtres optionnels : familles, modeles, poses, solutions, siEcart (uniquement si la solution standard laisse un écart à combler).",
+    "liste": [
+      {
+        "id": "compribande",
+        "libelle": "Mousse imprégnée d'étanchéité (compribande)",
+        "unite": "metre",
+        "prixFictif": 3,
+        "familles": [
+          "fenetre",
+          "porte-fenetre",
+          "baie",
+          "porte-entree",
+          "porte-service"
+        ]
+      },
+      {
+        "id": "mastic",
+        "libelle": "Mastic d'étanchéité",
+        "unite": "piece",
+        "quantite": 2,
+        "prixFictif": 12,
+        "familles": [
+          "fenetre",
+          "porte-fenetre",
+          "baie",
+          "porte-entree",
+          "porte-service",
+          "fenetre-toit"
+        ]
+      },
+      {
+        "id": "fixations",
+        "libelle": "Vis, pattes de fixation et cales",
+        "unite": "kit",
+        "prixFictif": 22,
+        "familles": [
+          "fenetre",
+          "porte-fenetre",
+          "baie",
+          "porte-entree",
+          "porte-service"
+        ]
+      },
+      {
+        "id": "habillage-ext",
+        "libelle": "Profils d'habillage extérieur (couvre-joints)",
+        "unite": "metre",
+        "prixFictif": 6,
+        "familles": [
+          "fenetre",
+          "porte-fenetre",
+          "baie",
+          "porte-entree",
+          "porte-service"
+        ],
+        "poses": [
+          "renovation"
+        ]
+      },
+      {
+        "id": "tapees",
+        "libelle": "Tapées d'élargissement / profils de compensation",
+        "unite": "metre",
+        "prixFictif": 9,
+        "familles": [
+          "fenetre",
+          "porte-fenetre",
+          "baie",
+          "porte-entree",
+          "porte-service"
+        ],
+        "solutions": [
+          "standard"
+        ],
+        "siEcart": true
+      },
+      {
+        "id": "appui",
+        "libelle": "Pièce d'appui et bavette",
+        "unite": "piece",
+        "prixFictif": 35,
+        "familles": [
+          "fenetre",
+          "porte-fenetre"
+        ],
+        "poses": [
+          "depose_totale",
+          "neuf_applique",
+          "neuf_tunnel"
+        ]
+      },
+      {
+        "id": "finitions-int",
+        "libelle": "Finitions intérieures (baguettes, enduit)",
+        "unite": "kit",
+        "prixFictif": 25,
+        "familles": [
+          "fenetre",
+          "porte-fenetre",
+          "baie",
+          "porte-entree",
+          "porte-service"
+        ],
+        "poses": [
+          "depose_totale"
+        ]
+      },
+      {
+        "id": "seuil",
+        "libelle": "Seuil aluminium et rejet d'eau",
+        "unite": "piece",
+        "prixFictif": 40,
+        "familles": [
+          "porte-entree",
+          "porte-service",
+          "porte-fenetre",
+          "baie"
+        ]
+      },
+      {
+        "id": "raccord-toit",
+        "libelle": "Raccord d'étanchéité de toiture (tuiles ou ardoises)",
+        "unite": "piece",
+        "prixFictif": 95,
+        "familles": [
+          "fenetre-toit"
+        ]
+      },
+      {
+        "id": "isolation-toit",
+        "libelle": "Kit d'isolation et pare-vapeur",
+        "unite": "kit",
+        "prixFictif": 60,
+        "familles": [
+          "fenetre-toit"
+        ]
+      },
+      {
+        "id": "chevetre",
+        "libelle": "Bois de chevêtre et fixations",
+        "unite": "kit",
+        "prixFictif": 45,
+        "familles": [
+          "fenetre-toit"
+        ],
+        "poses": [
+          "toit_creation"
+        ]
+      },
+      {
+        "id": "habillage-toit",
+        "libelle": "Habillage intérieur (tablettes)",
+        "unite": "kit",
+        "prixFictif": 70,
+        "familles": [
+          "fenetre-toit"
+        ],
+        "poses": [
+          "toit_creation"
+        ]
+      },
+      {
+        "id": "fixation-garage",
+        "libelle": "Kit de fixation et chevilles",
+        "unite": "kit",
+        "prixFictif": 35,
+        "familles": [
+          "porte-garage"
+        ]
+      },
+      {
+        "id": "joint-seuil",
+        "libelle": "Joint de seuil",
+        "unite": "metreLargeur",
+        "prixFictif": 5,
+        "familles": [
+          "porte-garage"
+        ]
+      },
+      {
+        "id": "habillage-garage",
+        "libelle": "Profils d'habillage de l'ouverture",
+        "unite": "metre",
+        "prixFictif": 8,
+        "familles": [
+          "porte-garage"
+        ],
+        "solutions": [
+          "standard"
+        ],
+        "siEcart": true
+      },
+      {
+        "id": "fixation-volet",
+        "libelle": "Kit de fixation du volet",
+        "unite": "kit",
+        "prixFictif": 20,
+        "familles": [
+          "volet"
+        ]
+      },
+      {
+        "id": "gonds-volet",
+        "libelle": "Gonds, pentures et arrêts de volets",
+        "unite": "kit",
+        "prixFictif": 38,
+        "familles": [
+          "volet"
+        ],
+        "poses": [
+          "volet_fixations_neuves"
+        ]
+      },
+      {
+        "id": "compensation-volet",
+        "libelle": "Profils de compensation",
+        "unite": "metre",
+        "prixFictif": 7,
+        "familles": [
+          "volet"
+        ],
+        "solutions": [
+          "standard"
+        ],
+        "siEcart": true
+      },
+      {
+        "id": "gonds-portail",
+        "libelle": "Gonds et pivots réglables",
+        "unite": "kit",
+        "prixFictif": 60,
+        "familles": [
+          "portail"
+        ],
+        "modeles": [
+          "battant-plein",
+          "battant-semi-ajoure",
+          "battant-ajoure"
+        ]
+      },
+      {
+        "id": "butee",
+        "libelle": "Butée centrale et arrêts de vantaux",
+        "unite": "kit",
+        "prixFictif": 35,
+        "familles": [
+          "portail"
+        ],
+        "modeles": [
+          "battant-plein",
+          "battant-semi-ajoure",
+          "battant-ajoure"
+        ]
+      },
+      {
+        "id": "rail-sol",
+        "libelle": "Rail de guidage au sol",
+        "unite": "metreLargeur",
+        "prixFictif": 18,
+        "familles": [
+          "portail"
+        ],
+        "modeles": [
+          "coulissant-plein",
+          "coulissant-ajoure"
+        ]
+      },
+      {
+        "id": "galets",
+        "libelle": "Galets et guide haut",
+        "unite": "kit",
+        "prixFictif": 70,
+        "familles": [
+          "portail"
+        ],
+        "modeles": [
+          "coulissant-plein",
+          "coulissant-ajoure"
+        ]
+      },
+      {
+        "id": "gonds-portillon",
+        "libelle": "Gonds et gâche",
+        "unite": "kit",
+        "prixFictif": 28,
+        "familles": [
+          "portillon"
+        ]
+      },
+      {
+        "id": "scellement",
+        "libelle": "Scellement chimique et chevilles",
+        "unite": "kit",
+        "prixFictif": 25,
+        "familles": [
+          "portail",
+          "portillon"
+        ]
+      },
+      {
+        "id": "piliers",
+        "libelle": "Paire de piliers",
+        "unite": "piece",
+        "prixFictif": 380,
+        "familles": [
+          "portail"
+        ],
+        "poses": [
+          "portail_piliers_neufs"
+        ]
+      },
+      {
+        "id": "poteaux",
+        "libelle": "Paire de poteaux",
+        "unite": "piece",
+        "prixFictif": 180,
+        "familles": [
+          "portillon"
+        ],
+        "poses": [
+          "portail_piliers_neufs"
+        ]
+      },
+      {
+        "id": "compensation-portail",
+        "libelle": "Cales et gonds de compensation",
+        "unite": "kit",
+        "prixFictif": 30,
+        "familles": [
+          "portail",
+          "portillon"
+        ],
+        "solutions": [
+          "standard"
+        ],
+        "siEcart": true
+      }
+    ]
+  },
+  "solutions": {
+    "standard": {
+      "libelle": "Solution standard",
+      "accroche": "Taille catalogue, le meilleur prix",
+      "avantages": [
+        "Prix plus bas",
+        "Choix resserré de matériaux et coloris",
+        "Souvent disponible en magasin"
+      ],
+      "delai": "À chiffrer"
+    },
+    "surmesure": {
+      "libelle": "Solution sur mesure",
+      "accroche": "Fabriquée à vos dimensions exactes",
+      "avantages": [
+        "Ajustée au centimètre, sans habillage à ajouter",
+        "Tous les matériaux, coloris et options",
+        "Rendu plus soigné"
+      ],
+      "delai": "À chiffrer"
+    }
+  }
 }

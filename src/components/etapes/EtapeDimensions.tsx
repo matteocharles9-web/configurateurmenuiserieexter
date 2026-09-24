@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { catalogue } from '../../data/types';
-import { famille as getFamille } from '../../lib/catalogue';
+import { famille as getFamille, posesDisponibles, typePose } from '../../lib/catalogue';
 import { useProjet } from '../../state/ProjetContext';
 import { GuideMesure } from '../mesure/GuideMesure';
 import { Bouton } from '../ui/Bouton';
 import { Badge } from '../ui/Carte';
 import { Champ } from '../ui/Champ';
 import { Icone } from '../ui/Icone';
+import { CarteChoix, GroupeChoix } from '../ui/Choix';
 
 export function EtapeDimensions() {
   const { ouverture: o, majOuverture } = useProjet();
@@ -91,6 +92,42 @@ export function EtapeDimensions() {
           </div>
         )}
       </div>
+
+      <GroupeChoix legende="Comment sera-t-elle posée ?" aide="La manière de poser détermine la taille standard possible et les accessoires nécessaires.">
+        {posesDisponibles(o.famille, o.modele).map((p) => (
+          <CarteChoix key={p.id} nom="pose" valeur={p.id} coche={o.pose === p.id} onChange={() => majOuverture({ pose: p.id })} titre={p.libelle} description={p.description} />
+        ))}
+      </GroupeChoix>
+
+      <GroupeChoix legende="Qui s'occupe de la pose ?">
+        {catalogue.pose.posePar.map((p) => (
+          <CarteChoix
+            key={p.id}
+            nom="pose-par"
+            valeur={p.id}
+            coche={o.posePar === p.id}
+            onChange={() => majOuverture({ posePar: p.id })}
+            titre={p.libelle}
+            description={p.description}
+            visuel={
+              <span className="grid size-10 place-items-center rounded-full bg-bleu-clair text-bleu">
+                <Icone nom={p.id === 'pro' ? 'utilisateur' : 'metre'} />
+              </span>
+            }
+            compact
+          />
+        ))}
+      </GroupeChoix>
+
+      {o.posePar === 'pro' && typePose(o.pose).remplacement && (
+        <label className="flex cursor-pointer items-start gap-3 rounded-xl bg-white p-4 ring-1 ring-bord">
+          <input type="checkbox" className="mt-0.5 size-5 shrink-0 accent-bleu" checked={o.repriseAnciennes} onChange={(e) => majOuverture({ repriseAnciennes: e.target.checked })} />
+          <span>
+            <span className="block font-bold text-marine">{catalogue.pose.reprise.libelle}</span>
+            <span className="text-sm">{catalogue.pose.reprise.description}</span>
+          </span>
+        </label>
+      )}
 
       <div className="flex items-start gap-3 rounded-xl bg-white p-4 ring-1 ring-bord">
         <Icone nom="telephone" className="mt-0.5 size-5 shrink-0 text-bleu" />

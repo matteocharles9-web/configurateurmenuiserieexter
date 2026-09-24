@@ -1,20 +1,34 @@
 import type { Ouverture } from '../data/types';
-import { famille, materiau, materiauxDisponibles, optionsParDefaut } from '../lib/catalogue';
+import { colorisPour, famille, materiauxPour, optionsParDefaut, posesDisponibles } from '../lib/catalogue';
 import { nouvelIdOuverture } from '../lib/ids';
 
 /** Rend une ouverture cohérente après un changement (modèle, matériau, coloris, options). */
 export function normaliser(o: Ouverture): Ouverture {
   const f = famille(o.famille);
   const modele = f.modeles.some((m) => m.id === o.modele) ? o.modele : f.modeles[0].id;
-  const mats = materiauxDisponibles(f.id, modele);
+  const solution = o.solution === 'standard' && f.standard ? 'standard' : 'surmesure';
+  // En standard, le choix de matériaux et de coloris est limité à l'offre standard.
+  const mats = materiauxPour({ famille: f.id, modele, solution });
   const mat = mats.includes(o.materiau) ? o.materiau : mats[0];
-  const cols = materiau(mat).coloris;
+  const cols = colorisPour({ famille: f.id, materiau: mat, solution });
   const col = cols.includes(o.coloris) ? o.coloris : cols[0];
+  const poses = posesDisponibles(f.id, modele).map((p) => p.id);
+  const pose = poses.includes(o.pose) ? o.pose : poses[0];
   // On garde les choix existants qui s'appliquent encore, on complète avec les valeurs par défaut.
   const defauts = optionsParDefaut(f.id, modele);
   const options: Ouverture['options'] = {};
   for (const [g, v] of Object.entries(defauts)) options[g] = o.options[g] ?? v;
-  return { ...o, modele, materiau: mat, coloris: col, options, quantite: Math.max(1, Math.round(o.quantite || 1)) };
+  return {
+    ...o,
+    modele,
+    solution,
+    posePar: o.posePar === 'client' ? 'client' : 'pro',
+    pose,
+    materiau: mat,
+    coloris: col,
+    options,
+    quantite: Math.max(1, Math.round(o.quantite || 1)),
+  };
 }
 
 export function nouvelleOuverture(partiel: Partial<Ouverture> = {}): Ouverture {
@@ -32,7 +46,9 @@ export function nouvelleOuverture(partiel: Partial<Ouverture> = {}): Ouverture {
     materiau: '',
     coloris: '',
     options: {},
-    pose: 'renovation',
+    pose: '',
+    posePar: 'pro',
+    solution: 'surmesure',
     repriseAnciennes: true,
     ...partiel,
   });

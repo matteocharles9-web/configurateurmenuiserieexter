@@ -10,6 +10,7 @@ import { EtapeDimensions } from '../components/etapes/EtapeDimensions';
 import { EtapeMateriau } from '../components/etapes/EtapeMateriau';
 import { EtapeOptions } from '../components/etapes/EtapeOptions';
 import { EtapeProduit } from '../components/etapes/EtapeProduit';
+import { EtapeSolution } from '../components/etapes/EtapeSolution';
 import { NavigationEtapes, suivante } from '../components/etapes/NavigationEtapes';
 import { BarreProgression } from '../components/layout/BarreProgression';
 import { FilAriane } from '../components/layout/EnTete';
@@ -21,6 +22,7 @@ import { ProjetIntrouvable } from './ProjetIntrouvable';
 const COMPOSANTS: Record<EtapeId, ComponentType> = {
   produit: EtapeProduit,
   dimensions: EtapeDimensions,
+  solution: EtapeSolution,
   materiau: EtapeMateriau,
   coloris: EtapeColoris,
   options: EtapeOptions,
@@ -28,7 +30,8 @@ const COMPOSANTS: Record<EtapeId, ComponentType> = {
 
 const TITRES: Record<EtapeId, string> = {
   produit: 'Choisissez votre produit',
-  dimensions: 'Indiquez les dimensions',
+  dimensions: 'Dimensions et manière de poser',
+  solution: 'Standard ou sur mesure ?',
   materiau: 'Choisissez le matériau',
   coloris: 'Choisissez le coloris',
   options: 'Options et pose',

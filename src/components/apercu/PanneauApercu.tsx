@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Ouverture } from '../../data/types';
+import { catalogue, type Ouverture } from '../../data/types';
 import { coloris, famille, formatDimensions, materiau, modele } from '../../lib/catalogue';
 import { ApercuPhoto } from './ApercuPhoto';
 import { RenduMenuiserie } from './RenduMenuiserie';
@@ -45,6 +45,8 @@ export function PanneauApercu({ projetId, ouverture: o }: { projetId: string; ou
               <br />
               {materiau(o.materiau).libelle} · {coloris(o.coloris).libelle} · {formatDimensions(o)}
               {o.quantite > 1 && ` · × ${o.quantite}`}
+              <br />
+              <span className="text-xs">{catalogue.solutions[o.solution].libelle}</span>
             </p>
             <p className="sr-only">Produit : {famille(o.famille).libelle}</p>
           </>

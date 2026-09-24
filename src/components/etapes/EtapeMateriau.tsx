@@ -1,4 +1,5 @@
-import { enMinuscules, gamme as getGamme, materiau as getMateriau, materiauxDisponibles } from '../../lib/catalogue';
+import { enMinuscules, gamme as getGamme, materiau as getMateriau, materiauxDisponibles, materiauxPour } from '../../lib/catalogue';
+import { LimiteStandard } from './EtapeSolution';
 import { useProjet } from '../../state/ProjetContext';
 import { Performances } from '../projet/Performances';
 import { CarteChoix, GroupeChoix } from '../ui/Choix';
@@ -6,10 +7,12 @@ import { CarteChoix, GroupeChoix } from '../ui/Choix';
 export function EtapeMateriau() {
   const { ouverture: o, majOuverture } = useProjet();
   if (!o) return null;
-  const dispo = materiauxDisponibles(o.famille, o.modele).map(getMateriau);
+  const dispo = materiauxPour(o).map(getMateriau);
+  const limite = materiauxPour(o).length < materiauxDisponibles(o.famille, o.modele).length;
 
   return (
     <div className="space-y-8">
+      {limite && <LimiteStandard quoi="matériaux" />}
       <GroupeChoix legende="Quel matériau ?" aide="Chaque matériau a ses atouts : voici ce qu'ils changent au quotidien.">
         {dispo.map((m) => (
           <CarteChoix

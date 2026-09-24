@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useState, type ReactNode } from 'react';
 import type { ContexteLogement, Demande, Ouverture, Projet } from '../data/types';
-import { coloris as getColoris, materiau as getMateriau } from '../lib/catalogue';
+import { coloris as getColoris, colorisPour } from '../lib/catalogue';
 import { nouvelIdOuverture, nouvelIdProjet } from '../lib/ids';
 import { chargerProjet, sauverProjet } from '../lib/stockage';
 import { changerFamille, normaliser, nouvelleOuverture } from './ouverture';
@@ -25,7 +25,8 @@ function majOuvertures(p: Projet, f: (o: Ouverture) => Ouverture): Projet {
 }
 
 function reducer(p: Projet | null, a: Action): Projet | null {
-  if (a.type === 'charger') return a.projet;
+  // Au chargement, on complète les projets enregistrés par une version antérieure du prototype.
+  if (a.type === 'charger') return a.projet && { ...a.projet, ouvertures: a.projet.ouvertures.map((o) => normaliser(o)) };
   if (!p) return p;
   const suite = ((): Projet => {
     switch (a.type) {
@@ -50,7 +51,7 @@ function reducer(p: Projet | null, a: Action): Projet | null {
         return { ...p, ouvertureActive: a.id };
       case 'appliquerColoris':
         // Seules les ouvertures dont le matériau propose ce coloris sont modifiées.
-        return majOuvertures(p, (o) => (getMateriau(o.materiau).coloris.includes(a.coloris) ? { ...o, coloris: a.coloris } : o));
+        return majOuvertures(p, (o) => (colorisPour(o).includes(a.coloris) ? { ...o, coloris: a.coloris } : o));
       case 'contexte':
         return { ...p, contexte: { ...p.contexte, ...a.patch } };
       case 'echantillon':
@@ -152,7 +153,7 @@ export function ProjetProvider({ children }: { children: ReactNode }) {
       activer: (id) => dispatch({ type: 'activer', id }),
       appliquerColorisATous: (c) => {
         dispatch({ type: 'appliquerColoris', coloris: c });
-        return projet?.ouvertures.filter((o) => getMateriau(o.materiau).coloris.includes(c) && o.coloris !== c).length ?? 0;
+        return projet?.ouvertures.filter((o) => colorisPour(o).includes(c) && o.coloris !== c).length ?? 0;
       },
       majContexte: (patch) => dispatch({ type: 'contexte', patch }),
       basculerEchantillon: (c) => dispatch({ type: 'echantillon', coloris: getColoris(c).id }),

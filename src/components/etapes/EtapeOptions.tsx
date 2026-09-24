@@ -1,4 +1,4 @@
-import { catalogue, type GroupeOptions } from '../../data/types';
+import type { GroupeOptions } from '../../data/types';
 import { groupesOptions } from '../../lib/catalogue';
 import { useProjet } from '../../state/ProjetContext';
 import { Performances } from '../projet/Performances';
@@ -22,9 +22,11 @@ export function EtapeOptions() {
     return Array.isArray(v) ? v.includes(id) : v === id;
   };
 
+  const groupes = groupesOptions(o);
   return (
     <div className="space-y-8">
-      {groupesOptions(o).map((g) => (
+      {!groupes.length && <p>Pas d'option supplémentaire pour ce produit.</p>}
+      {groupes.map((g) => (
         <GroupeChoix key={g.id} legende={g.libelle} aide={g.aide}>
           {g.choix.map((c) => (
             <CarteChoix
@@ -42,25 +44,6 @@ export function EtapeOptions() {
           ))}
         </GroupeChoix>
       ))}
-
-      <GroupeChoix legende="Type de pose" aide="Votre conseiller confirmera la pose la plus adaptée lors du métrage.">
-        {catalogue.pose.types.map((p) => (
-          <CarteChoix key={p.id} nom="pose" valeur={p.id} coche={o.pose === p.id} onChange={() => majOuverture({ pose: p.id })} titre={p.libelle} description={p.description} />
-        ))}
-      </GroupeChoix>
-
-      <GroupeChoix legende="Vos anciennes menuiseries" colonnes="">
-        <CarteChoix
-          multiple
-          compact
-          nom="reprise"
-          valeur="reprise"
-          coche={o.repriseAnciennes}
-          onChange={() => majOuverture({ repriseAnciennes: !o.repriseAnciennes })}
-          titre={catalogue.pose.reprise.libelle}
-          description={catalogue.pose.reprise.description}
-        />
-      </GroupeChoix>
 
       <section aria-labelledby="titre-perf-opt">
         <h3 id="titre-perf-opt" className="mb-3 text-base font-semibold">

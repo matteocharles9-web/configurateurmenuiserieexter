@@ -12,6 +12,9 @@ const ASTUCE: Record<string, string> = {
   'porte-entree': "Notez le côté des paumelles (charnières) vu depuis l'extérieur, et si la porte pousse vers l'intérieur.",
   'porte-service': "Notez le côté des paumelles vu depuis l'extérieur.",
   'porte-garage': "Mesurez aussi la retombée de linteau (du haut de l'ouverture au plafond) et la place de chaque côté : elles déterminent le type de porte possible.",
+  'fenetre-toit': "Astuce : la taille de votre fenêtre de toit actuelle est souvent inscrite sur sa plaque d'identification, visible en ouvrant le vantail (en haut du dormant).",
+  portail: "Mesurez entre les piliers, en haut et en bas : retenez la plus petite mesure. Notez aussi la hauteur des piliers et la pente éventuelle de l'allée.",
+  portillon: "Mesurez entre les poteaux ou piliers, en haut et en bas, et retenez la plus petite mesure.",
   volet: "Pour un volet roulant, mesurez aussi la profondeur de l'embrasure ; pour un volet battant, vérifiez la place sur la façade de chaque côté.",
 };
 
