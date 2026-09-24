@@ -306,13 +306,16 @@ export function RenduMenuiserie(props: Props) {
       );
     }
     if (modele === 'coulissant') {
+      // Volet entrouvert : il glisse sur un rail le long de la façade.
+      const x0 = w * 0.45;
+      const lp = w * 0.62;
       return (
         <g>
           <FenetreFond />
-          <rect x={-w * 0.02} y={-8} width={w * 1.5} height={4} fill="#8A8F98" />
-          <rect x={w * 0.45} y={-4} width={w * 0.95} height={h + 4} fill={cadre} stroke={trait} strokeWidth={fin} />
-          {Array.from({ length: Math.floor((w * 0.95) / 12) }, (_, i) => <line key={i} x1={w * 0.45 + (i + 1) * 12} x2={w * 0.45 + (i + 1) * 12} y1={-4} y2={h} stroke={trait} strokeOpacity={0.4} strokeWidth={fin * 0.6} />)}
-          <Fleche x1={w * 0.8} x2={w * 0.55} y={h * 0.5} />
+          <rect x={-4} y={-8} width={w * 1.1} height={4} fill="#8A8F98" />
+          <rect x={x0} y={-4} width={lp} height={h + 4} fill={cadre} stroke={trait} strokeWidth={fin} />
+          {Array.from({ length: Math.floor(lp / 12) }, (_, i) => <line key={i} x1={x0 + (i + 1) * 12} x2={x0 + (i + 1) * 12} y1={-4} y2={h} stroke={trait} strokeOpacity={0.4} strokeWidth={fin * 0.6} />)}
+          <Fleche x1={w * 0.85} x2={w * 0.6} y={h * 0.5} />
         </g>
       );
     }

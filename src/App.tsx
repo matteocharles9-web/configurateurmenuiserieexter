@@ -6,6 +6,7 @@ import { ToastProvider } from './components/ui/Toast';
 import { PageAccueil } from './pages/PageAccueil';
 import { PageBesoin } from './pages/PageBesoin';
 import { PageConfigurateur } from './pages/PageConfigurateur';
+import { PageGalerie } from './pages/PageGalerie';
 import { PagePartage } from './pages/PagePartage';
 import { PageRecap } from './pages/PageRecap';
 import { PageReprendre } from './pages/PageReprendre';
@@ -16,6 +17,7 @@ function Routes() {
   const [page, a, b] = useRoute();
   if (page === 'besoin') return <PageBesoin />;
   if (page === 'reprendre') return <PageReprendre />;
+  if (page === 'galerie') return <PageGalerie />;
   if (page === 'r' && a) return <PageReprise id={a} donnees={b} />;
   if (page === 'partage' && a) return <PagePartage donnees={a} />;
   if (page === 'projet' && a) {

@@ -27,9 +27,8 @@ export function recommander(r: ReponsesBesoin): Recommandation {
   const dispo = materiauxDisponibles(fam.id, modeleId);
   const score = (m: string) => besoins.filter((b) => b.materiaux?.includes(m)).length;
   const prefereBudget = r.budget === 'haut' ? ['mixte', 'bois', 'alu'] : r.budget === 'maitrise' ? ['pvc', 'acier'] : [];
-  const materiau = [...dispo].sort(
-    (a, b) => score(b) - score(a) || Number(prefereBudget.includes(b)) - Number(prefereBudget.includes(a)),
-  )[0];
+  const rang = (m: string) => (prefereBudget.includes(m) ? prefereBudget.indexOf(m) : prefereBudget.length);
+  const materiau = [...dispo].sort((a, b) => score(b) - score(a) || rang(a) - rang(b))[0];
 
   // Gamme : la plus haute entre le budget et les besoins exprimés.
   let gamme = GAMME_BUDGET[r.budget];

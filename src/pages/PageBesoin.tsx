@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { catalogue } from '../data/types';
-import { gamme, materiau, modele } from '../lib/catalogue';
+import { enMinuscules, gamme, materiau, modele } from '../lib/catalogue';
 import { recommander, type Budget, type ReponsesBesoin } from '../lib/recommandation';
 import { cheminEtape, naviguer } from '../router';
 import { creerProjet, useProjet } from '../state/ProjetContext';
@@ -163,7 +163,7 @@ export function PageBesoin() {
             <div className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-bord sm:p-7">
               <p className="text-sm font-bold text-bleu">Notre recommandation</p>
               <h1 ref={titre} tabIndex={-1} className="mt-1 text-2xl font-semibold outline-none">
-                {modele(reco.ouverture.famille, reco.ouverture.modele).libelle} en {materiau(reco.ouverture.materiau).libelle}, gamme {gamme(reco.ouverture.gamme).libelle}
+                {modele(reco.ouverture.famille, reco.ouverture.modele).libelle} en {enMinuscules(materiau(reco.ouverture.materiau).libelle)}, gamme {gamme(reco.ouverture.gamme).libelle}
               </h1>
               <div className="mt-5 grid gap-6 sm:grid-cols-[14rem_1fr]">
                 <div>

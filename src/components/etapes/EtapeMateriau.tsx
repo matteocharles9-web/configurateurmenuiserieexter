@@ -1,4 +1,4 @@
-import { gamme as getGamme, materiau as getMateriau, materiauxDisponibles } from '../../lib/catalogue';
+import { enMinuscules, gamme as getGamme, materiau as getMateriau, materiauxDisponibles } from '../../lib/catalogue';
 import { useProjet } from '../../state/ProjetContext';
 import { Performances } from '../projet/Performances';
 import { CarteChoix, GroupeChoix } from '../ui/Choix';
@@ -38,7 +38,7 @@ export function EtapeMateriau() {
 
       <section aria-labelledby="titre-perf">
         <h3 id="titre-perf" className="mb-3 text-base font-semibold">
-          Ce que vous gagnez avec {getMateriau(o.materiau).libelle.toLowerCase()} en gamme {getGamme(o.gamme).libelle}
+          Ce que vous gagnez avec {enMinuscules(getMateriau(o.materiau).libelle)} en gamme {getGamme(o.gamme).libelle}
         </h3>
         <Performances ouverture={o} />
       </section>

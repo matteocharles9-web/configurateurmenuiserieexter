@@ -60,3 +60,6 @@ export const choixSelectionnes = (o: Ouverture) =>
 
 export const formatDimensions = (o: Ouverture) =>
   o.dimensionsInconnues ? 'Dimensions à relever' : `${o.largeurCm} × ${o.hauteurCm} cm`;
+
+/** Libellé en milieu de phrase : « aluminium », mais « PVC » reste en capitales. */
+export const enMinuscules = (libelle: string) => (libelle === libelle.toUpperCase() ? libelle : libelle.toLowerCase());
