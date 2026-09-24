@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+/* Palette et typographies reprises du PowerPoint « Menuiserie extérieure – proposition web ». */
+@theme {
+  --color-marine: #0B2E6F;
+  --color-marine-fonce: #071F4D;
+  --color-bleu: #1557C0;
+  --color-bleu-clair: #E3ECFA;
+  --color-jaune: #F7CE1A;
+  --color-jaune-clair: #FEF6D3;
+  --color-fond: #F4F6FB;
+  --color-texte: #3D475C;
+  --color-bord: #D5DBE8;
+  --color-alerte: #9A4B00;
+  --color-alerte-fond: #FFF3E0;
+  --color-ok: #1D7A46;
+  --font-titre: "Rubik", system-ui, sans-serif;
+  --font-sans: "Nunito Sans", system-ui, sans-serif;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body { @apply bg-fond text-texte font-sans antialiased; }
+  h1, h2, h3, h4 { @apply font-titre text-marine; }
+  :focus-visible { outline: 3px solid var(--color-bleu); outline-offset: 2px; border-radius: 4px; }
+  button, [role="button"], label, summary { -webkit-tap-highlight-color: transparent; }
+  dialog::backdrop { background: rgb(7 31 77 / 0.55); }
+}
+
+@utility sr-only-focusable {
+  &:not(:focus) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
