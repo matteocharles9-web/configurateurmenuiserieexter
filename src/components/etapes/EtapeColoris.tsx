@@ -1,4 +1,5 @@
-import { colorisDisponibles, coloris as getColoris, materiau as getMateriau } from '../../lib/catalogue';
+import { colorisPour, coloris as getColoris, materiau as getMateriau } from '../../lib/catalogue';
+import { LimiteStandard } from './EtapeSolution';
 import { useProjet } from '../../state/ProjetContext';
 import { ContexteLogement } from '../projet/ContexteLogement';
 import { Bouton } from '../ui/Bouton';
@@ -28,10 +29,11 @@ export function EtapeColoris() {
 
   return (
     <div className="space-y-8">
+      {colorisPour(o).length < getMateriau(o.materiau).coloris.length && <LimiteStandard quoi="coloris" />}
       <fieldset>
         <legend className="font-titre text-base font-semibold text-marine">Coloris disponibles en {getMateriau(o.materiau).libelle}</legend>
         <div className="mt-3 grid grid-cols-3 gap-3 sm:grid-cols-4 xl:grid-cols-6">
-          {colorisDisponibles(o.materiau).map((c) => (
+          {colorisPour(o).map(getColoris).map((c) => (
             <label
               key={c.id}
               className={`flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 p-2 text-center text-sm font-bold has-[:focus-visible]:outline has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-bleu ${

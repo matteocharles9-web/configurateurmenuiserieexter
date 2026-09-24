@@ -13,6 +13,8 @@ type Props = Pick<Ouverture, 'famille' | 'modele' | 'materiau' | 'coloris'> &
     avecMur?: boolean;
     className?: string;
     decoratif?: boolean;
+    /** Placement quand le rendu est imbriqué dans un autre SVG (illustration de la maison). */
+    position?: { x: number; y: number; width: number; height: number };
   };
 
 function nuance(hex: string, k: number) {
@@ -25,7 +27,7 @@ function nuance(hex: string, k: number) {
 const a = (v: string | string[] | undefined, id: string) => (Array.isArray(v) ? v.includes(id) : v === id);
 
 export function RenduMenuiserie(props: Props) {
-  const { famille, modele, materiau, coloris, options = {}, avecMur = false, className = '', decoratif = false } = props;
+  const { famille, modele, materiau, coloris, options = {}, avecMur = false, className = '', decoratif = false, position } = props;
   const f = getFamille(famille);
   const w = props.largeurCm && props.largeurCm > 0 ? props.largeurCm : f.dimensions.defaut[0];
   const h = props.hauteurCm && props.hauteurCm > 0 ? props.hauteurCm : f.dimensions.defaut[1];
@@ -42,7 +44,8 @@ export function RenduMenuiserie(props: Props) {
   const avecCoffre =
     (famille === 'volet' && (modele === 'roulant-renovation' || modele === 'bso')) ||
     (['fenetre', 'porte-fenetre', 'baie'].includes(famille) && options['volet-integre'] && options['volet-integre'] !== 'aucun') ||
-    (famille === 'porte-garage' && modele === 'enroulable');
+    (famille === 'porte-garage' && modele === 'enroulable') ||
+    (famille === 'fenetre-toit' && options['occultation-toit'] === 'volet-solaire');
   const coffre = avecCoffre ? Math.max(16, Math.min(28, h * 0.12)) : 0;
   const m = avecMur ? Math.max(20, Math.max(w, h) * 0.18) : 2;
   const vb = { x: -m, y: -m - coffre, w: w + 2 * m, h: h + coffre + 2 * m };
@@ -261,6 +264,79 @@ export function RenduMenuiserie(props: Props) {
       );
     }
 
+    if (famille === 'fenetre-toit') {
+      const e = 7; // raccord et capot aluminium gris
+      const tab = modele === 'tabatiere';
+      const occ = options['occultation-toit'];
+      return (
+        <g>
+          <rect x={-4} y={-4} width={w + 8} height={h + 8} rx={2} fill="#555B62" />
+          <rect x={0} y={0} width={w} height={h} fill="#6B7178" stroke="#3E4349" strokeWidth={fin} />
+          <rect x={e * 0.6} y={e * 0.6} width={w - e * 1.2} height={h - e * 1.2} fill={cadre} stroke={trait} strokeWidth={fin} />
+          <Vitre x={e * 1.4} y={e * 1.4} l={w - e * 2.8} ht={h - e * 2.8} />
+          {occ === 'store' && <rect x={e * 1.4} y={e * 1.4} width={w - e * 2.8} height={(h - e * 2.8) * 0.45} fill="#24365C" opacity={0.85} />}
+          {occ === 'volet-solaire' && (
+            <>
+              <Lames x={e * 1.4} y={e * 1.4} l={w - e * 2.8} ht={(h - e * 2.8) * 0.4} pas={4} couleur="#6B7178" />
+              <rect x={w * 0.35} y={-coffre + 3} width={w * 0.3} height={coffre - 6} fill="#1F3A5F" stroke="#9FB3C8" strokeWidth={fin * 0.5} />
+            </>
+          )}
+          {modele === 'rotation' && <rect x={w / 2 - w * 0.25} y={e * 0.8} width={w * 0.5} height={3} rx={1.5} fill={poignee} />}
+          {modele === 'projection' && <path d={`M${e * 1.4} ${e * 1.4} L${w / 2} ${h - e * 1.4} L${w - e * 1.4} ${e * 1.4}`} fill="none" stroke={trait} strokeOpacity={0.6} strokeWidth={fin * 0.7} strokeDasharray={`${fin * 4} ${fin * 3}`} />}
+          {tab && <line x1={w * 0.8} y1={h - e} x2={w * 0.95} y2={h * 0.55} stroke="#3E4349" strokeWidth={fin * 1.5} />}
+        </g>
+      );
+    }
+
+    if (famille === 'portail' || famille === 'portillon') {
+      const style = modele.includes('semi') ? 'semi' : modele.includes('ajoure') ? 'ajoure' : 'plein';
+      const coulissant = modele.startsWith('coulissant');
+      const vantaux = famille === 'portillon' || coulissant ? 1 : 2;
+      const lv = w / vantaux;
+      const cadreE = 5;
+      const Vantail = ({ x }: { x: number }) => {
+        const barreaux = Math.max(2, Math.floor(lv / 11));
+        const limite = style === 'semi' ? h * 0.42 : style === 'ajoure' ? h - cadreE : cadreE; // hauteur de la partie barreaudée
+        return (
+          <g>
+            {/* partie pleine */}
+            {style !== 'ajoure' && (
+              <g>
+                <rect x={x} y={limite} width={lv} height={h - limite} fill={cadre} stroke={trait} strokeWidth={fin} />
+                {Array.from({ length: Math.floor((h - limite) / 12) }, (_, i) => (
+                  <line key={i} x1={x + 3} x2={x + lv - 3} y1={limite + (i + 1) * 12} y2={limite + (i + 1) * 12} stroke={trait} strokeOpacity={0.45} strokeWidth={fin * 0.6} />
+                ))}
+              </g>
+            )}
+            {/* barreaudage */}
+            {style !== 'plein' && (
+              <g fill={cadre} stroke={trait} strokeWidth={fin * 0.5}>
+                <rect x={x} y={0} width={lv} height={cadreE} />
+                {style === 'ajoure' && <rect x={x} y={h - cadreE * 2} width={lv} height={cadreE * 2} />}
+                {Array.from({ length: barreaux }, (_, i) => (
+                  <rect key={i} x={x + ((i + 0.5) * lv) / barreaux - 1.5} y={0} width={3} height={style === 'ajoure' ? h : limite} />
+                ))}
+              </g>
+            )}
+            <rect x={x} y={0} width={lv} height={h} fill="none" stroke={trait} strokeWidth={fin * 1.4} />
+          </g>
+        );
+      };
+      return (
+        <g>
+          {coulissant && <rect x={-w * 0.05} y={h} width={w * 1.9} height={3} fill="#8A8F98" />}
+          {Array.from({ length: vantaux }, (_, i) => <Vantail key={i} x={i * lv} />)}
+          {famille === 'portillon' || coulissant ? (
+            <rect x={w - 12} y={h * 0.45} width={8} height={3} rx={1.5} fill={poignee} />
+          ) : (
+            <rect x={w / 2 - 4} y={h * 0.45} width={8} height={3} rx={1.5} fill={poignee} />
+          )}
+          {coulissant && <Fleche x1={w * 0.35} x2={w * 0.65} y={h + 12} />}
+          {a(options['equipements-portail'], 'boite-lettres') && <rect x={famille === 'portillon' ? w * 0.15 : w * 0.08} y={h * 0.5} width={24} height={16} fill="#3E4349" stroke="#1E1E1E" strokeWidth={fin} />}
+        </g>
+      );
+    }
+
     // Volets
     if (modele === 'roulant-renovation' || modele === 'roulant-traditionnel') {
       const baisse = h * 0.62;
@@ -354,6 +430,7 @@ export function RenduMenuiserie(props: Props) {
     <svg
       viewBox={`${vb.x} ${vb.y} ${vb.w} ${vb.h}`}
       className={className}
+      {...position}
       role={decoratif ? undefined : 'img'}
       aria-hidden={decoratif || undefined}
       aria-label={decoratif ? undefined : titre}
@@ -368,12 +445,25 @@ export function RenduMenuiserie(props: Props) {
           <rect width="40" height="12" fill={col.hex} />
           <path d="M0 3 Q10 1 20 3 T40 3 M0 8 Q12 10 22 8 T40 8" stroke={nuance(col.hex, -0.25)} strokeWidth="0.8" fill="none" />
         </pattern>
+        <pattern id={`tuiles${uid}`} width="18" height="12" patternUnits="userSpaceOnUse">
+          <rect width="18" height="12" fill="#B4553A" />
+          <path d="M0 11 Q4.5 5 9 11 Q13.5 5 18 11" fill="none" stroke="#8E3F2A" strokeWidth="1" />
+        </pattern>
         <pattern id={`mur${uid}`} width="30" height="15" patternUnits="userSpaceOnUse">
           <rect width="30" height="15" fill="#EFE9DF" />
           <path d="M0 15 H30 M15 0 V15" stroke="#E2DACB" strokeWidth="0.8" />
         </pattern>
       </defs>
-      {avecMur && (
+      {avecMur && (famille === 'portail' || famille === 'portillon') && (
+        <g>
+          <rect x={vb.x} y={vb.y} width={vb.w} height={vb.h} fill="#DCEBF5" />
+          <rect x={vb.x} y={h} width={vb.w} height={m} fill="#B9C79A" />
+          <rect x={-m * 0.8} y={-12} width={m * 0.7} height={h + 12} fill="#D9D2C5" stroke="#B5AD9F" strokeWidth={fin} />
+          <rect x={w + m * 0.1} y={-12} width={m * 0.7} height={h + 12} fill="#D9D2C5" stroke="#B5AD9F" strokeWidth={fin} />
+        </g>
+      )}
+      {avecMur && famille === 'fenetre-toit' && <rect x={vb.x} y={vb.y} width={vb.w} height={vb.h} fill={`url(#tuiles${uid})`} />}
+      {avecMur && !['portail', 'portillon', 'fenetre-toit'].includes(famille) && (
         <g>
           <rect x={vb.x} y={vb.y} width={vb.w} height={vb.h} fill={`url(#mur${uid})`} />
           {famille === 'porte-garage' || famille.startsWith('porte') || famille === 'baie' ? (

@@ -3,8 +3,10 @@ import catalogueJson from './catalogue.json';
 export type Critere = 'thermique' | 'acoustique' | 'securite' | 'entretien';
 export type Niveaux = Partial<Record<Critere, number>>;
 export type Teinte = 'blanc' | 'clair' | 'fonce' | 'couleur' | 'bois';
-export type TypePose = 'renovation' | 'depose_totale';
-export type EtapeId = 'produit' | 'dimensions' | 'materiau' | 'coloris' | 'options';
+export type TypePose = string;
+export type Solution = 'standard' | 'surmesure';
+export type PosePar = 'pro' | 'client';
+export type EtapeId = 'produit' | 'dimensions' | 'solution' | 'materiau' | 'coloris' | 'options';
 
 export interface Modele {
   id: string;
@@ -23,6 +25,37 @@ export interface Famille {
   dimensions: { largeur: number[]; hauteur: number[]; defaut: number[] };
   prixFictif: { base: number; parM2: number };
   modeles: Modele[];
+  /** Types de pose proposés (ids de catalogue.pose.types). */
+  poses: string[];
+  /** Critères de performance pertinents (tous si absent). */
+  criteres?: string[];
+  /** Offre standard : tailles catalogue, matériaux et coloris disponibles. */
+  standard?: { tailles: number[][]; materiaux: string[]; coloris: string[] };
+}
+
+export interface TypePoseDef {
+  id: string;
+  libelle: string;
+  description: string;
+  remplacement: boolean;
+  /** Écart max (cm) entre l'ouverture et une taille standard ; null = ouverture adaptée au produit. */
+  ecartMaxStandard: number | null;
+  sens: 'inferieur' | 'superieur';
+  modeles?: string[];
+  prixFictif: { fixe: number; parM2: number };
+}
+
+export interface Accessoire {
+  id: string;
+  libelle: string;
+  unite: 'piece' | 'kit' | 'metre' | 'metreLargeur';
+  quantite?: number;
+  prixFictif: number;
+  familles?: string[];
+  modeles?: string[];
+  poses?: string[];
+  solutions?: Solution[];
+  siEcart?: boolean;
 }
 
 export interface Gamme {
@@ -74,7 +107,7 @@ export interface GroupeOptions {
 
 export interface Regle {
   id: string;
-  condition: 'copropriete' | 'secteurProtege' | 'secteurProtegeInconnu' | 'changementAspect';
+  condition: 'copropriete' | 'secteurProtege' | 'secteurProtegeInconnu' | 'changementAspect' | 'portailOuCloture' | 'creationOuverture';
   niveau: 'attention' | 'info';
   titre: string;
   message: string;
@@ -117,7 +150,7 @@ export interface Catalogue {
     modePrix: 'fictif' | 'masque';
     fourchette: { min: number; max: number };
     arrondi: number;
-    pose: Record<TypePose, { fixe: number; parM2: number }>;
+    coefStandard: number;
     repriseAnciennes: number;
     coefGamme: Record<string, number>;
   };
@@ -132,10 +165,13 @@ export interface Catalogue {
     libellesNiveaux: string[];
   };
   pose: {
-    types: { id: TypePose; libelle: string; description: string }[];
+    types: TypePoseDef[];
+    posePar: { id: PosePar; libelle: string; description: string }[];
     reprise: { libelle: string; description: string };
     noteMetrage: string;
   };
+  accessoires: { liste: Accessoire[] };
+  solutions: Record<Solution, { libelle: string; accroche: string; avantages: string[]; delai: string }>;
   reglementaire: { avertissement: string; regles: Regle[] };
   besoins: Besoin[];
   rdv: { magasins: string[]; creneaux: string[]; joursProposes: number };
@@ -162,6 +198,8 @@ export interface Ouverture {
   /** groupe d'options → choix (id) ou liste de choix */
   options: Record<string, string | string[]>;
   pose: TypePose;
+  posePar: PosePar;
+  solution: Solution;
   repriseAnciennes: boolean;
 }
 
@@ -195,7 +233,8 @@ export interface Projet {
 
 export const ETAPES: { id: EtapeId; libelle: string }[] = [
   { id: 'produit', libelle: 'Produit' },
-  { id: 'dimensions', libelle: 'Dimensions' },
+  { id: 'dimensions', libelle: 'Dimensions et pose' },
+  { id: 'solution', libelle: 'Standard ou sur mesure' },
   { id: 'materiau', libelle: 'Matériau' },
   { id: 'coloris', libelle: 'Coloris' },
   { id: 'options', libelle: 'Options' },

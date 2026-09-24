@@ -8,9 +8,13 @@ Ce tableau sert à l'arbitrage **make or buy** du configurateur.
 
 | Fonctionnalité | Réellement fonctionnel | Simulé | À acheter ou à intégrer en production |
 | --- | --- | --- | --- |
+| Maison interactive (accueil) | Scène SVG avec les 10 familles, survol, zoom animé, panneau catégorie, ajout au projet en cours, maison qui reflète le projet | – | Visuels 3D ou photos de maisons types, contenus éditoriaux par catégorie |
+| Solution standard ou sur mesure | Calcul de la taille standard (sens et tolérance de pose), schéma de l'écart, comparaison chiffrée, restriction matériaux et coloris en standard | Prix fictifs, délais « À chiffrer » | **Référentiel standard** : tailles réellement en stock par magasin, prix et disponibilités (PIM, stocks) |
+| Types de pose et pose par le client | Types de pose par produit, choix installateur ou client, impact sur le devis | Prix de pose fictifs | Grille de prix des poseurs par zone, règles de faisabilité |
+| Accessoires nécessaires à la pose | Liste calculée (produit, modèle, pose, solution, écart), quantités et prix par ligne | Prix fictifs | Nomenclatures fournisseurs, articles réels et ajout au panier |
 | Double entrée produit / besoin | Questionnaire, règles de recommandation, préremplissage du parcours | – | Règles à valider par le métier ; enrichissement possible par les données de vente |
 | Parcours en 5 étapes, progression, retour à toute étape | Oui, sur mobile et ordinateur | – | – |
-| Catalogue (7 familles, 31 modèles, tous types de volets), gammes, options | Moteur de règles (options par produit et modèle, cohérence matériau / coloris) | Contenu représentatif | **Référentiel produit (PIM)** et règles de faisabilité fournisseurs |
+| Catalogue (10 familles, 42 modèles, tous types de volets, portails et portillons), gammes, options | Moteur de règles (options par produit et modèle, cohérence matériau / coloris) | Contenu représentatif | **Référentiel produit (PIM)** et règles de faisabilité fournisseurs |
 | Aide à la prise de mesures | Guide pas à pas avec schémas, message « métrage par le poseur » | – | Vidéos pédagogiques ; **mesure assistée par smartphone** (brique éditeur) |
 | Alerte réglementaire | Règles copropriété, secteur protégé, changement d'aspect, démarches affichées | – | Validation juridique des textes ; éventuellement API cadastre / PLU / périmètres ABF |
 | Projet maison entière | Plusieurs ouvertures, duplication, même coloris pour toutes, suppression | – | – |

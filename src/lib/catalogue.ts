@@ -63,3 +63,28 @@ export const formatDimensions = (o: Ouverture) =>
 
 /** Libellé en milieu de phrase : « aluminium », mais « PVC » reste en capitales. */
 export const enMinuscules = (libelle: string) => (libelle === libelle.toUpperCase() ? libelle : libelle.toLowerCase());
+
+export const typePose = (id: string) => catalogue.pose.types.find((p) => p.id === id) ?? catalogue.pose.types[0];
+
+/** Types de pose proposés pour un produit (certains ne valent que pour quelques modèles). */
+export const posesDisponibles = (familleId: string, modeleId: string) =>
+  famille(familleId)
+    .poses.map(typePose)
+    .filter((p) => !p.modeles || p.modeles.includes(modeleId));
+
+/** Matériaux proposés selon la solution : en standard, seulement ceux de l'offre standard. */
+export function materiauxPour(o: Pick<Ouverture, 'famille' | 'modele' | 'solution'>): string[] {
+  const tous = materiauxDisponibles(o.famille, o.modele);
+  const std = famille(o.famille).standard;
+  if (o.solution !== 'standard' || !std) return tous;
+  const communs = tous.filter((m) => std.materiaux.includes(m));
+  return communs.length ? communs : tous;
+}
+
+export function colorisPour(o: Pick<Ouverture, 'famille' | 'materiau' | 'solution'>): string[] {
+  const tous = materiau(o.materiau).coloris;
+  const std = famille(o.famille).standard;
+  if (o.solution !== 'standard' || !std) return tous;
+  const communs = tous.filter((c) => std.coloris.includes(c));
+  return communs.length ? communs : tous;
+}

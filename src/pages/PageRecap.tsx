@@ -10,7 +10,7 @@ import { LienPartage } from '../components/partage/LienPartage';
 import { SauvegardeQr } from '../components/partage/SauvegardeQr';
 import { AlertesReglementaires } from '../components/projet/AlerteReglementaire';
 import { Echantillons } from '../components/projet/Echantillons';
-import { Fourchette, MentionPrixFictifs } from '../components/projet/Estimation';
+import { Fourchette, MentionPrixFictifs, RepartitionProjet } from '../components/projet/Estimation';
 import { ListeOuvertures } from '../components/projet/ListeOuvertures';
 import { RealisationsAvis } from '../components/projet/RealisationsAvis';
 import { Carte } from '../components/ui/Carte';
@@ -70,8 +70,9 @@ export function PageRecap({ id }: { id: string }) {
           <div className="min-w-0 space-y-5">
             <Carte titre="Estimation indicative" id="t-estim">
               <MentionPrixFictifs />
-              <p className="mt-3 text-sm">Projet complet, fourni et posé :</p>
+              <p className="mt-3 text-sm">Projet complet, pose et accessoires compris :</p>
               <Fourchette ouvertures={projet.ouvertures} className="text-3xl" />
+              <RepartitionProjet ouvertures={projet.ouvertures} />
               <ul className="mt-4 divide-y divide-bord text-sm">
                 {lignesAChiffrer.map((x) => (
                   <li key={x.l} className="flex items-center justify-between gap-3 py-2">

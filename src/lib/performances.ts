@@ -1,5 +1,5 @@
 import { catalogue, type Critere, type Ouverture } from '../data/types';
-import { choixSelectionnes, gamme, materiau } from './catalogue';
+import { choixSelectionnes, famille, gamme, materiau } from './catalogue';
 
 export interface NiveauCritere {
   id: string;
@@ -27,7 +27,8 @@ export function niveaux(o: Pick<Ouverture, 'materiau' | 'gamme'> & Partial<Ouver
 
 export function benefices(o: Parameters<typeof niveaux>[0]): NiveauCritere[] {
   const n = niveaux(o);
-  return catalogue.performances.criteres.map((c) => {
+  const pertinents = o.famille ? famille(o.famille).criteres : undefined;
+  return catalogue.performances.criteres.filter((c) => !pertinents || pertinents.includes(c.id)).map((c) => {
     const niveau = n[(c.source ?? c.id) as Critere];
     return {
       id: c.id,

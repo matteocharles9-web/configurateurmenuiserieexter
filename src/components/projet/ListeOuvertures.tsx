@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from 'react';
-import { catalogue, type Ouverture } from '../../data/types';
-import { choixSelectionnes, coloris, formatDimensions, materiau, modele } from '../../lib/catalogue';
+import type { Ouverture } from '../../data/types';
+import { choixSelectionnes, coloris, formatDimensions, materiau, modele, typePose } from '../../lib/catalogue';
+import { devis } from '../../lib/prix';
 import { cheminEtape, naviguer } from '../../router';
 import { useProjet } from '../../state/ProjetContext';
 import { RenduMenuiserie } from '../apercu/RenduMenuiserie';
@@ -14,8 +15,18 @@ export function resumeOuverture(o: Ouverture) {
   const options = choixSelectionnes(o)
     .filter(({ choix }) => choix.prixFictif > 0)
     .map(({ choix }) => choix.libelle);
-  const pose = catalogue.pose.types.find((p) => p.id === o.pose)?.libelle;
-  return [modele(o.famille, o.modele).libelle, formatDimensions(o), `${materiau(o.materiau).libelle} ${coloris(o.coloris).libelle.toLowerCase()}`, ...options, pose, o.repriseAnciennes ? 'Reprise des anciennes' : ''].filter(Boolean) as string[];
+  const d = devis(o);
+  const taille = o.solution === 'standard' ? `standard ${d.largeur} × ${d.hauteur} cm` : `sur mesure ${formatDimensions(o)}`;
+  return [
+    modele(o.famille, o.modele).libelle,
+    taille,
+    `${materiau(o.materiau).libelle} ${coloris(o.coloris).libelle.toLowerCase()}`,
+    ...options,
+    typePose(o.pose).libelle,
+    o.posePar === 'pro' ? 'posé par un installateur' : 'posé par vos soins',
+    d.accessoires.length ? `${d.accessoires.length} accessoires de pose` : '',
+    o.posePar === 'pro' && typePose(o.pose).remplacement && o.repriseAnciennes ? 'reprise des anciennes' : '',
+  ].filter(Boolean) as string[];
 }
 
 export function CarteOuvertureLecture({ o, children }: { o: Ouverture; children?: ReactNode }) {

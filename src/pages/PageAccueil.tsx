@@ -1,8 +1,10 @@
+import { useEffect, useRef, useState } from 'react';
 import { catalogue } from '../data/types';
-import { listerProjets } from '../lib/stockage';
+import { dernierProjetId, listerProjets } from '../lib/stockage';
 import { cheminEtape, naviguer } from '../router';
 import { creerProjet, useProjet } from '../state/ProjetContext';
-import { RenduMenuiserie } from '../components/apercu/RenduMenuiserie';
+import { MaisonInteractive } from '../components/maison/MaisonInteractive';
+import { DetailCategorie, ListeCategories } from '../components/maison/PanneauCategorie';
 import { BoutonsTransmission } from '../components/contact/BoutonAide';
 import { FilAriane } from '../components/layout/EnTete';
 import { RealisationsAvis } from '../components/projet/RealisationsAvis';
@@ -12,32 +14,104 @@ import { Icone } from '../components/ui/Icone';
 const ETAPES_CLIENT = [
   { t: 'Configurer', d: 'Fenêtre, porte, baie ou volet, aux bonnes dimensions.', i: 'crayon' },
   { t: 'Visualiser', d: 'Le résultat sur une photo de votre maison.', i: 'photo' },
-  { t: 'Comparer', d: 'Matériaux, coloris, confort et options.', i: 'copier' },
+  { t: 'Comparer', d: 'Standard ou sur mesure, pose et accessoires compris.', i: 'copier' },
   { t: 'Estimer', d: 'Un premier budget indicatif.', i: 'facture' },
   { t: 'Transmettre', d: 'Projet sauvegardé et envoyé à un conseiller.', i: 'chat' },
 ];
 
 export function PageAccueil() {
-  const { charger } = useProjet();
+  const { projet, charger, chargerParId, ajouterOuverture } = useProjet();
   const projets = listerProjets().slice(0, 3);
+  const [focus, setFocus] = useState<string | null>(null);
+  const [survol, setSurvol] = useState<string | null>(null);
+  const [detailPret, setDetailPret] = useState(false);
+  const panneau = useRef<HTMLDivElement>(null);
 
-  const demarrer = (famille: string) => {
-    const p = creerProjet({ pointEntree: 'produit' }, { famille });
+  // La maison reprend les choix du dernier projet (coches, coloris…).
+  useEffect(() => {
+    const id = dernierProjetId();
+    if (!projet && id) chargerParId(id);
+  }, [projet, chargerParId]);
+
+  const choisir = (f: string) => {
+    setSurvol(null);
+    setDetailPret(false);
+    setFocus(f);
+  };
+  const retour = () => {
+    setDetailPret(false);
+    setFocus(null);
+  };
+  const zoomTermine = () => {
+    setDetailPret(true);
+    // Sur mobile, le panneau est sous la maison : on l'amène à l'écran.
+    if (window.matchMedia('(max-width: 1023px)').matches) panneau.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const configurer = (famille: string, modele: string, ajouter: boolean) => {
+    if (ajouter && projet) {
+      ajouterOuverture({ famille, modele });
+      naviguer(cheminEtape(projet.id, 'dimensions'));
+      return;
+    }
+    const p = creerProjet({ pointEntree: 'produit' }, { famille, modele });
     charger(p);
-    naviguer(cheminEtape(p.id, 'produit'));
+    naviguer(cheminEtape(p.id, 'dimensions'));
   };
 
   return (
     <>
       <FilAriane elements={[{ libelle: 'Accueil', lien: '#/' }, { libelle: 'Menuiserie' }]} />
       <div className="mx-auto max-w-7xl space-y-10 px-4 pt-4">
-        <section className="grid items-center gap-6 overflow-hidden rounded-3xl bg-marine p-6 text-white sm:p-10 lg:grid-cols-[1.3fr_1fr]">
-          <div>
-            <p className="mb-2 inline-block rounded-full bg-jaune px-3 py-1 text-xs font-bold text-marine">Configurateur menuiserie extérieure</p>
-            <h1 className="text-3xl leading-tight font-bold text-white sm:text-4xl">Fenêtres, portes et volets sur mesure : configurez et estimez en ligne</h1>
-            <p className="mt-3 text-white/85 sm:text-lg">Matériau, coloris, options, aperçu sur votre maison, puis rendez-vous avec un conseiller qui a déjà votre projet en main.</p>
+        <section aria-labelledby="titre-maison">
+          <p className="mb-2 inline-block rounded-full bg-jaune px-3 py-1 text-xs font-bold text-marine">Menuiserie extérieure · standard et sur mesure</p>
+          <h1 id="titre-maison" className="text-2xl leading-tight font-bold sm:text-4xl">
+            Fenêtres, portes, volets, portails : configurez et estimez en ligne
+          </h1>
+          <p className="mt-2 max-w-3xl sm:text-lg">Choisissez un élément de la maison. Donnez vos dimensions et votre manière de poser : nous vous proposons une solution standard et une solution sur mesure, pose et accessoires compris.</p>
+
+          <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+            <div className="overflow-hidden rounded-3xl shadow-sm ring-1 ring-bord lg:self-start">
+              <MaisonInteractive focus={focus} survol={survol} onSurvol={setSurvol} onChoisir={choisir} onZoomTermine={zoomTermine} ouvertures={projet?.ouvertures ?? []} />
+            </div>
+            <div ref={panneau} className="scroll-mt-4 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-bord">
+              {focus && detailPret ? (
+                <DetailCategorie
+                  key={focus}
+                  familleId={focus}
+                  onRetour={retour}
+                  onConfigurer={(modele, ajouter) => configurer(focus, modele, ajouter)}
+                  projetEnCours={projet ? { id: projet.id, nb: projet.ouvertures.length } : null}
+                />
+              ) : focus ? (
+                <p className="py-10 text-center font-bold text-marine" role="status">
+                  Zoom sur l'élément…
+                </p>
+              ) : (
+                <ListeCategories survol={survol} onSurvol={setSurvol} onChoisir={choisir} dansProjet={new Set(projet?.ouvertures.map((o) => o.famille))} />
+              )}
+            </div>
           </div>
-          <RenduMenuiserie decoratif famille="baie" modele="coulissant-2" materiau="alu" coloris="anthracite" avecMur options={{ 'volet-integre': 'motorise-radio' }} className="mx-auto h-48 w-full max-w-sm rounded-2xl sm:h-56" />
+        </section>
+
+        <section className="flex flex-col items-start justify-between gap-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-bord sm:flex-row sm:items-center">
+          <div>
+            <p className="flex items-center gap-2 font-titre text-xl font-semibold text-marine">
+              <Icone nom="aide" className="size-6 text-bleu" /> Vous ne savez pas quoi choisir ?
+            </p>
+            <p className="mt-1">Froid, bruit, sécurité, facture d'énergie : répondez à 4 questions, nous vous recommandons un produit et une gamme.</p>
+            <ul className="mt-3 flex flex-wrap gap-2 text-sm">
+              {catalogue.besoins.slice(0, 4).map((b) => (
+                <li key={b.id} className="flex items-center gap-1.5 rounded-full bg-fond px-3 py-1">
+                  <Icone nom={b.icone} className="size-4 shrink-0 text-bleu" />
+                  {b.libelle}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <Bouton variante="jaune" className="shrink-0" iconeDroite="droite" onClick={() => naviguer('/besoin')}>
+            Je pars de mon besoin
+          </Bouton>
         </section>
 
         {projets.length > 0 && (
@@ -59,47 +133,6 @@ export function PageAccueil() {
             </ul>
           </section>
         )}
-
-        <section aria-labelledby="titre-entree">
-          <h2 id="titre-entree" className="text-2xl font-semibold">
-            Par où voulez-vous commencer ?
-          </h2>
-          <div className="mt-4 grid gap-4 lg:grid-cols-2">
-            <div className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-bord">
-              <p className="flex items-center gap-2 font-titre text-xl font-semibold text-marine">
-                <Icone nom="ok" className="size-6 text-bleu" /> Je sais ce que je veux
-              </p>
-              <p className="mt-1">Choisissez directement votre produit.</p>
-              <ul className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
-                {catalogue.familles.map((f) => (
-                  <li key={f.id}>
-                    <button type="button" onClick={() => demarrer(f.id)} className="flex h-full w-full flex-col items-center gap-1 rounded-xl border-2 border-bord p-2 text-center text-sm font-bold text-marine hover:border-bleu hover:bg-bleu-clair/50">
-                      <RenduMenuiserie decoratif famille={f.id} modele={f.modeles[0].id} materiau={f.modeles[0].materiaux?.[0] ?? f.materiaux[0]} coloris="blanc" className="h-14 w-full" />
-                      {f.libelle}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="flex flex-col rounded-2xl bg-white p-5 shadow-sm ring-1 ring-bord">
-              <p className="flex items-center gap-2 font-titre text-xl font-semibold text-marine">
-                <Icone nom="aide" className="size-6 text-bleu" /> Je pars de mon besoin
-              </p>
-              <p className="mt-1">Froid, bruit, sécurité, facture d'énergie : répondez à 4 questions, nous vous recommandons un produit et une gamme.</p>
-              <ul className="mt-4 grid grid-cols-2 gap-2 text-sm">
-                {catalogue.besoins.slice(0, 4).map((b) => (
-                  <li key={b.id} className="flex items-center gap-2 rounded-lg bg-fond p-2">
-                    <Icone nom={b.icone} className="size-5 shrink-0 text-bleu" />
-                    {b.libelle}
-                  </li>
-                ))}
-              </ul>
-              <Bouton variante="jaune" className="mt-auto self-start" iconeDroite="droite" onClick={() => naviguer('/besoin')}>
-                Trouver ce qu'il me faut
-              </Bouton>
-            </div>
-          </div>
-        </section>
 
         <section aria-labelledby="titre-comment">
           <h2 id="titre-comment" className="text-2xl font-semibold">
